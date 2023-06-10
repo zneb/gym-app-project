@@ -1,18 +1,28 @@
 import { useState } from "react";
 import styles from "./Routine.module.css";
+import { getDatabase } from "../../assets/database";
 
 const workout = [
   {
     name: "Warm-Up",
     sets: 1,
     exercises: [
-      { name: "Yuri's Shoulder Band Warmup", progression: 0 },
-      { name: "Squat Sky Reaches", progression: 0 },
-      { name: "GMB Wrist Prep", progression: 0 },
-      { name: "Deadbugs", progression: 0 },
-      { name: "Arch Hang", progression: 0 },
-      { name: "Parallel Bar Support Hold", progression: 0 },
-      { name: "Bulgarian Split Squat", progression: 0 },
+      {
+        progression: "Yuri's Shoulder Band Warmup",
+        exercise: "Yuri's Shoulder Band Warmup",
+      },
+      { progression: "Squat Sky Reaches", exercise: "Squat Sky Reaches" },
+      { progression: "GMB Wrist Prep", exercise: "GMB Wrist Prep" },
+      { progression: "Deadbugs", exercise: "Deadbugs" },
+      { progression: "Arch Hang", exercise: "Arch Hang" },
+      {
+        progression: "Parallel Bar Support Hold",
+        exercise: "Parallel Bar Support Hold",
+      },
+      {
+        progression: "Bulgarian Split Squat",
+        exercise: "Bulgarian Split Squat",
+      },
     ],
   },
 
@@ -21,8 +31,14 @@ const workout = [
     sets: 3,
     rest: 90,
     exercises: [
-      { name: "Pull-up", reps: [5, 8] },
-      { name: "Partial ROM Pistol Squat", reps: [5, 8] },
+      {
+        progression: "Pull-up Progression",
+        exercise: "Scapular Pull",
+      },
+      {
+        progression: "Squat Progression",
+        exercise: "Assisted Squat",
+      },
     ],
   },
 
@@ -31,8 +47,14 @@ const workout = [
     sets: 3,
     rest: 90,
     exercises: [
-      { name: "Parrallel Bar Dip", reps: [5, 8] },
-      { name: "Beginner Harop Curl", reps: [5, 8] },
+      {
+        progression: "Dip Progression",
+        exercise: "Parallel Bar Support Hold",
+      },
+      {
+        progression: "Hinge Progression",
+        exercise: "Romanian Deadlift",
+      },
     ],
   },
 
@@ -41,8 +63,14 @@ const workout = [
     sets: 3,
     rest: 90,
     exercises: [
-      { name: "Incline Row", reps: [5, 8] },
-      { name: "Push-Up", reps: [5, 8] },
+      {
+        progression: "Row Progression",
+        exercise: "Vertical Row",
+      },
+      {
+        progression: "Push-Up Progression",
+        exercise: "Vertical Push-up",
+      },
     ],
   },
 
@@ -51,15 +79,25 @@ const workout = [
     sets: 3,
     rest: 60,
     exercises: [
-      { name: "Tucked Hanging Leg Raise", reps: [8, 12] },
-      { name: "Copenhagen Plank", reps: [15, 30], type: "time" },
-      { name: "Hyper Extension", reps: [8, 12] },
+      {
+        progression: "Anti-extension Progression",
+        exercise: "Plank",
+      },
+      {
+        progression: "Anti-rotation Progression",
+        exercise: "Banded Pallof Press",
+      },
+      {
+        progression: "Extension Progression",
+        exercise: "Reverse Hyperextension",
+      },
     ],
   },
 ];
 
 export function Routine() {
   const [started, setStarted] = useState(false);
+  const { getExercise } = getDatabase();
 
   return (
     <>
@@ -67,7 +105,15 @@ export function Routine() {
         {workout.map(({ name, exercises }) => (
           <div className={styles.group}>
             <h3 className={styles.title}>{name}</h3>
-            {exercises.map(({ name, reps, type }) => {
+            {exercises.map(({ progression, exercise }) => {
+              const exerciseData = getExercise(progression, exercise);
+
+              if (!exerciseData) {
+                return "failed";
+              }
+
+              const { name, reps, type } = exerciseData;
+
               const suffix = type === "time" ? "s" : "";
               const repCount = `${reps[0]}${suffix}${
                 reps[1] ? ` - ${reps[1]}${suffix}` : ""
