@@ -7,6 +7,8 @@ import { ErrorPage } from "./routes/error-page.tsx";
 import { History } from "./routes/history.tsx";
 import { Home } from "./routes/home.tsx";
 import { Settings } from "./routes/settings.tsx";
+import { ProgressionPage } from "./routes/progression.tsx";
+import { EmptyRoot } from "./routes/emptyRoot.tsx";
 
 const router = createBrowserRouter([
   {
@@ -25,6 +27,13 @@ const router = createBrowserRouter([
       { path: "settings", element: <Settings /> },
     ],
   },
+  {
+    path: "/",
+    element: <EmptyRoot />,
+    errorElement: <ErrorPage />,
+    children: [{ path: "/progression/:name", element: <ProgressionPage /> }],
+  },
+  { path: "/progression/:name", element: <ProgressionPage /> },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(

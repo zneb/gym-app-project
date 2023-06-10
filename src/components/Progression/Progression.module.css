@@ -1,0 +1,33 @@
+.progressions {
+  padding-top: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  flex: 1;
+  min-height: 0;
+  overflow-y: scroll;
+  padding-bottom: 60px;
+}
+
+.level {
+  display: flex;
+  gap: 10px;
+}
+.progression {
+  all: unset;
+  width: 70px;
+  text-align: center;
+}
+
+.icon {
+  background: #000;
+  width: 70px;
+  height: 70px;
+  border-radius: 20px;
+}
+
+.name {
+  font-weight: 600;
+  font-size: 0.8rem;
+}
