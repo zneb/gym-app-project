@@ -1,3 +1,11 @@
+import { Routine } from "../components/Routine";
+import { Title } from "../components/Title";
+
 export function Home() {
-  return <>home</>;
+  return (
+    <>
+      <Title>Routine</Title>
+      <Routine />
+    </>
+  );
 }

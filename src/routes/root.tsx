@@ -4,7 +4,9 @@ import { Navbar } from "../components/Navbar/index";
 export function Root() {
   return (
     <>
-      <Outlet />
+      <div className="page">
+        <Outlet />
+      </div>
       <Navbar />
     </>
   );

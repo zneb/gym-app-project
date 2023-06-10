@@ -1,3 +1,9 @@
+import { Title } from "../components/Title";
+
 export function History() {
-  return <>history</>;
+  return (
+    <>
+      <Title>History</Title>
+    </>
+  );
 }

@@ -1,3 +1,9 @@
+import { Title } from "../components/Title";
+
 export function Settings() {
-  return <>settings</>;
+  return (
+    <>
+      <Title>Settings</Title>
+    </>
+  );
 }
