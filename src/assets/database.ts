@@ -44,35 +44,86 @@ export const exerciseProgressions = [
     ],
     progressions: [[0, 1, 2, 3, [4, 5, 6, 7]]],
   },
-  // { name: "Partial ROM Pistol Squat", reps: [5, 8] },
-  // {
-  //   name: "Pair 2",
-  //   sets: 3,
-  //   rest: 90,
-  //   exercises: [
-  //     { name: "Parrallel Bar Dip", reps: [5, 8] },
-  //     { name: "Beginner Harop Curl", reps: [5, 8] },
-  //   ],
-  // },
 
-  // {
-  //   name: "Pair 3",
-  //   sets: 3,
-  //   rest: 90,
-  //   exercises: [
-  //     { name: "Incline Row", reps: [5, 8] },
-  //     { name: "Push-Up", reps: [5, 8] },
-  //   ],
-  // },
+  {
+    name: "Squat Progression",
+    exercises: [
+      { name: "Assisted Squat", reps: [5, 8] },
+      { name: "Squat", reps: [5, 8] },
+      { name: "Split Squat", reps: [5, 8] },
+      { name: "Bulgerian Split Squat", reps: [5, 8] },
+      { name: "Beginner Shrimp Squat", reps: [5, 8] },
+      { name: "Step-up", reps: [5, 8] },
+      { name: "Partial ROM Pistol Squat", reps: [5, 8] },
+      { name: "Intermediate Shrimp Squat", reps: [5, 8] },
+      { name: "Advanced Shrimp Squat", reps: [5, 8] },
+      { name: "Advanced Shrimp Squat", reps: [5, 8] },
+      { name: "Type-writer Pull-up", reps: [5, 8] },
+      { name: "Weighted Shrimp Squat", reps: [5, 8] },
+    ],
+    progressions: [
+      [0, 1, 2, 3, [4, 5, 6], [7, 8, 9], [10, null, null], [11, null, null]],
+    ],
+  },
 
-  // {
-  //   name: "Core triplet",
-  //   sets: 3,
-  //   rest: 60,
-  //   exercises: [
-  //     { name: "Tucked Hanging Leg Raise", reps: [8, 12] },
-  //     { name: "Copenhagen Plank", reps: [15, 30], type: "time" },
-  //     { name: "Hyper Extension", reps: [8, 12] },
-  //   ],
-  // },
+  {
+    name: "Dip Progression",
+    exercises: [
+      { name: "Parallel Bar Support Hold", reps: [15, 30], type: "time" },
+      { name: "Negative Dip", reps: [5, 8] },
+      { name: "Parallel Bar Dip", reps: [5, 8] },
+      { name: "Weighted Dip", reps: [5, 8] },
+      { name: "Ring Dip", reps: [5, 8] },
+      { name: "Ring RTO Dip", reps: [5, 8] },
+    ],
+    progressions: [[0, 1, 2, [3, 4], [null, 5]]],
+  },
+
+  {
+    name: "Hinge Progression",
+    exercises: [
+      { name: "Romanian Deadlift", reps: [5, 8] },
+      { name: "Single Legged Deadlift", reps: [5, 8] },
+      { name: "Banded Nordic Curl Negatives", reps: [5, 8] },
+      { name: "Beginner Harop Curl", reps: [5, 8] },
+      { name: "Glute Ham Raise", reps: [5, 8] },
+      { name: "Negative Hamstring Slide", reps: [5, 8] },
+      { name: "Banded Nordic Curl", reps: [5, 8] },
+      { name: "Advanced Harop Curl", reps: [5, 8] },
+      { name: "Hamstring Slide", reps: [5, 8] },
+      { name: "Nordic Curl", reps: [5, 8] },
+      { name: "Eccentric Single Leg Hamstring Slide", reps: [5, 8] },
+      { name: "Single Leg Hamstring Slide", reps: [5, 8] },
+    ],
+    progressions: [
+      [
+        0,
+        1,
+        [2, 3, 4, 5],
+        [6, 7, null, 8],
+        [9, null, null, 10],
+        [null, null, null, 11],
+      ],
+    ],
+  },
+
+  {
+    name: "Row Progression",
+    exercises: [
+      { name: "Parallel Bar Support Hold", reps: [15, 30], type: "time" },
+      { name: "Negative Dip", reps: [5, 8] },
+      { name: "Parallel Bar Dip", reps: [5, 8] },
+      { name: "Weighted Dip", reps: [5, 8] },
+      { name: "Ring Dip", reps: [5, 8] },
+      { name: "Ring RTO Dip", reps: [5, 8] },
+    ],
+    progressions: [[0, 1, 2, [3, 4], [null, 5]]],
+  },
 ];
+
+export function getDatabase() {
+  return {
+    getProgression: (progressionName: string) =>
+      exerciseProgressions.find(({ name }) => name === progressionName),
+  };
+}
