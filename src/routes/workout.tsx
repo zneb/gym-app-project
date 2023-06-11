@@ -1,9 +1,9 @@
-import { Routine } from "../components/Routine";
+import { Workout } from "../components/Workout";
 
-export function Workout() {
+export function WorkoutPage() {
   return (
     <div className="overlay">
-      <Routine started />
+      <Workout />
     </div>
   );
 }

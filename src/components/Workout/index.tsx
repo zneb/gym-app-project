@@ -1,14 +1,18 @@
-import styles from "./Routine.module.css";
+import styles from "./Workout.module.css";
 import { database } from "../../assets/database";
 import { Link, useLocation } from "react-router-dom";
 import { Title } from "../Title";
 import { FaCheck } from "react-icons/fa";
 import { useEffect, useState } from "react";
 
-export function Routine() {
+export function Workout() {
   const [data, setData] =
     useState<Awaited<ReturnType<typeof database.getRoutine>>>();
   const location = useLocation();
+
+  const [currentWorkout, setCurrentWorkout] = useState(
+    database.createWorkout("rr")
+  );
 
   useEffect(() => {
     database
@@ -49,28 +53,41 @@ export function Routine() {
                   <div className={styles.icon}></div>
                   <span>{name}</span>
 
-                  <span>{repCount}</span>
+                  <div className={styles.reps}>
+                    <input
+                      type="text"
+                      inputMode="numeric"
+                      pattern="[0-9]*"
+                      value={reps[reps.length - 1]}
+                    />
+                    <button
+                      onClick={() => {
+                        setCurrentWorkout((oldWorkout) => {
+                          oldWorkout.exercises.push({
+                            progression,
+                            exercise,
+                            reps: 10,
+                            time: new Date(),
+                          });
+
+                          return { ...oldWorkout };
+                        });
+                      }}
+                    >
+                      <FaCheck />
+                    </button>
+                  </div>
                 </>
               );
 
-              return progressionData?.progressions ? (
-                <Link
-                  to={`/progression/rr/${pair}/${progression}`}
-                  className={styles.exercise}
-                >
-                  {content}
-                </Link>
-              ) : (
-                <div className={styles.exercise}>{content}</div>
-              );
+              return <div className={styles.exercise}>{content}</div>;
             })}
           </div>
         ))}
+        <Link className={styles.end} to="/workout/rr">
+          End Workout
+        </Link>
       </div>
-
-      <Link className={styles.start} to="/workout/rr">
-        Start Workout
-      </Link>
     </>
   );
 }
