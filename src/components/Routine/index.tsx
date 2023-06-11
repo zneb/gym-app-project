@@ -2,7 +2,6 @@ import styles from "./Routine.module.css";
 import { database } from "../../assets/database";
 import { Link, useLocation } from "react-router-dom";
 import { Title } from "../Title";
-import { FaCheck } from "react-icons/fa";
 import { useEffect, useState } from "react";
 
 export function Routine() {

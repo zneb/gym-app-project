@@ -25,6 +25,7 @@
   height: 60px;
   background: #000;
   border-radius: 10px;
+  flex-shrink: 0;
 }
 .exercise {
   color: #fff;
@@ -72,4 +73,29 @@
   height: 30px;
   padding: 0;
   font-size: 10px;
+}
+
+.left {
+  display: flex;
+  flex-direction: column;
+  max-width: 100%;
+  min-width: 0;
+}
+
+.name {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.rep {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #b2b2b2;
+}
+
+.completed {
+  border: 2px #333333 solid;
+  padding: 4px 10px;
+  border-radius: 8px;
 }
