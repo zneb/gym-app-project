@@ -1,5 +1,5 @@
 import { FaTimes } from "react-icons/fa";
-import { exerciseProgressions, getProgression } from "../../assets/database";
+import {  getProgression } from "../../assets/database";
 import { Title } from "../Title";
 import styles from "./Progression.module.css";
 import { useNavigate, useParams } from "react-router-dom";
