@@ -230,17 +230,109 @@ export const exerciseProgressions = [
   },
 ];
 
-export function getDatabase() {
-  return {
-    getExercise: (progressionName: string, exerciseName: string) =>
-      exerciseProgressions
-        .find(({ name }) => name === progressionName)
-        ?.exercises.find(({ name }) => name === exerciseName) as
-        | {
-            name: string;
-            reps: number[];
-            type?: "time";
-          }
-        | undefined,
-  };
-}
+export const baseWorkout = [
+  {
+    name: "Warm-Up",
+    sets: 1,
+    exercises: [
+      {
+        progression: "Yuri's Shoulder Band Warmup",
+        exercise: "Yuri's Shoulder Band Warmup",
+      },
+      { progression: "Squat Sky Reaches", exercise: "Squat Sky Reaches" },
+      { progression: "GMB Wrist Prep", exercise: "GMB Wrist Prep" },
+      { progression: "Deadbugs", exercise: "Deadbugs" },
+      { progression: "Arch Hang", exercise: "Arch Hang" },
+      {
+        progression: "Parallel Bar Support Hold",
+        exercise: "Parallel Bar Support Hold",
+      },
+      {
+        progression: "Bulgarian Split Squat",
+        exercise: "Bulgarian Split Squat",
+      },
+    ],
+  },
+
+  {
+    name: "Pair 1",
+    sets: 3,
+    rest: 90,
+    exercises: [
+      {
+        progression: "Pull-up Progression",
+        exercise: "Scapular Pull",
+      },
+      {
+        progression: "Squat Progression",
+        exercise: "Assisted Squat",
+      },
+    ],
+  },
+
+  {
+    name: "Pair 2",
+    sets: 3,
+    rest: 90,
+    exercises: [
+      {
+        progression: "Dip Progression",
+        exercise: "Parallel Bar Support Hold",
+      },
+      {
+        progression: "Hinge Progression",
+        exercise: "Romanian Deadlift",
+      },
+    ],
+  },
+
+  {
+    name: "Pair 3",
+    sets: 3,
+    rest: 90,
+    exercises: [
+      {
+        progression: "Row Progression",
+        exercise: "Vertical Row",
+      },
+      {
+        progression: "Push-Up Progression",
+        exercise: "Vertical Push-up",
+      },
+    ],
+  },
+
+  {
+    name: "Core triplet",
+    sets: 3,
+    rest: 60,
+    exercises: [
+      {
+        progression: "Anti-extension Progression",
+        exercise: "Plank",
+      },
+      {
+        progression: "Anti-rotation Progression",
+        exercise: "Banded Pallof Press",
+      },
+      {
+        progression: "Extension Progression",
+        exercise: "Reverse Hyperextension",
+      },
+    ],
+  },
+];
+
+export const getProgression = (progressionName: string) =>
+  exerciseProgressions.find(({ name }) => name === progressionName);
+
+export const getExercise = (progressionName: string, exerciseName: string) =>
+  getProgression(progressionName)?.exercises.find(
+    ({ name }) => name === exerciseName
+  ) as
+    | {
+        name: string;
+        reps: number[];
+        type?: "time";
+      }
+    | undefined;

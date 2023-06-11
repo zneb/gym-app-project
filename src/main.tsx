@@ -33,7 +33,10 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [{ path: "/progression/:name", element: <ProgressionPage /> }],
   },
-  { path: "/progression/:name", element: <ProgressionPage /> },
+  {
+    path: "/progression/:name",
+    element: <ProgressionPage />,
+  },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(

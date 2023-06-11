@@ -2,14 +2,17 @@
   display: flex;
   flex-direction: column;
   gap: 30px;
-  padding: 0 20px;
+  padding: 20px;
   overflow-y: scroll;
   min-height: 0;
   flex: 1;
-  padding-bottom: 60px;
+  padding-bottom: 80px;
 }
 
 .group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .title {
@@ -17,11 +20,21 @@
   margin-bottom: 4px;
 }
 
+.icon {
+  width: 60px;
+  height: 60px;
+  background: #000;
+  border-radius: 10px;
+}
 .exercise {
   display: flex;
-  justify-content: space-between;
+  align-items: center;
+  gap: 4px;
 }
 
+.exercise > :last-child {
+  margin-left: auto;
+}
 .start {
   position: absolute;
   bottom: 10px;

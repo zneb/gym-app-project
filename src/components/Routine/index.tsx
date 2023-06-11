@@ -1,103 +1,11 @@
 import { useState } from "react";
 import styles from "./Routine.module.css";
-import { getDatabase } from "../../assets/database";
-
-const workout = [
-  {
-    name: "Warm-Up",
-    sets: 1,
-    exercises: [
-      {
-        progression: "Yuri's Shoulder Band Warmup",
-        exercise: "Yuri's Shoulder Band Warmup",
-      },
-      { progression: "Squat Sky Reaches", exercise: "Squat Sky Reaches" },
-      { progression: "GMB Wrist Prep", exercise: "GMB Wrist Prep" },
-      { progression: "Deadbugs", exercise: "Deadbugs" },
-      { progression: "Arch Hang", exercise: "Arch Hang" },
-      {
-        progression: "Parallel Bar Support Hold",
-        exercise: "Parallel Bar Support Hold",
-      },
-      {
-        progression: "Bulgarian Split Squat",
-        exercise: "Bulgarian Split Squat",
-      },
-    ],
-  },
-
-  {
-    name: "Pair 1",
-    sets: 3,
-    rest: 90,
-    exercises: [
-      {
-        progression: "Pull-up Progression",
-        exercise: "Scapular Pull",
-      },
-      {
-        progression: "Squat Progression",
-        exercise: "Assisted Squat",
-      },
-    ],
-  },
-
-  {
-    name: "Pair 2",
-    sets: 3,
-    rest: 90,
-    exercises: [
-      {
-        progression: "Dip Progression",
-        exercise: "Parallel Bar Support Hold",
-      },
-      {
-        progression: "Hinge Progression",
-        exercise: "Romanian Deadlift",
-      },
-    ],
-  },
-
-  {
-    name: "Pair 3",
-    sets: 3,
-    rest: 90,
-    exercises: [
-      {
-        progression: "Row Progression",
-        exercise: "Vertical Row",
-      },
-      {
-        progression: "Push-Up Progression",
-        exercise: "Vertical Push-up",
-      },
-    ],
-  },
-
-  {
-    name: "Core triplet",
-    sets: 3,
-    rest: 60,
-    exercises: [
-      {
-        progression: "Anti-extension Progression",
-        exercise: "Plank",
-      },
-      {
-        progression: "Anti-rotation Progression",
-        exercise: "Banded Pallof Press",
-      },
-      {
-        progression: "Extension Progression",
-        exercise: "Reverse Hyperextension",
-      },
-    ],
-  },
-];
+import { getExercise, baseWorkout } from "../../assets/database";
+import { Link } from "react-router-dom";
 
 export function Routine() {
   const [started, setStarted] = useState(false);
-  const { getExercise } = getDatabase();
+  const workout = [...baseWorkout];
 
   return (
     <>
@@ -120,10 +28,14 @@ export function Routine() {
               }`;
 
               return (
-                <div className={styles.exercise}>
+                <Link
+                  to={`/progression/${progression}`}
+                  className={styles.exercise}
+                >
+                  <div className={styles.icon}></div>
                   <span>{name}</span>
                   <span>{repCount}</span>
-                </div>
+                </Link>
               );
             })}
           </div>
