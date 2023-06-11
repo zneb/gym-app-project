@@ -8,7 +8,7 @@ import { History } from "./routes/history.tsx";
 import { Home } from "./routes/home.tsx";
 import { Settings } from "./routes/settings.tsx";
 import { ProgressionPage } from "./routes/progression.tsx";
-import { EmptyRoot } from "./routes/emptyRoot.tsx";
+import { Workout } from "./routes/workout.tsx";
 
 const router = createBrowserRouter([
   {
@@ -19,6 +19,10 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
+        children: [
+          { path: "/progression/:name", element: <ProgressionPage /> },
+          { path: "/workout/:name", element: <Workout /> },
+        ],
       },
       {
         path: "history",
@@ -26,16 +30,6 @@ const router = createBrowserRouter([
       },
       { path: "settings", element: <Settings /> },
     ],
-  },
-  {
-    path: "/",
-    element: <EmptyRoot />,
-    errorElement: <ErrorPage />,
-    children: [{ path: "/progression/:name", element: <ProgressionPage /> }],
-  },
-  {
-    path: "/progression/:name",
-    element: <ProgressionPage />,
   },
 ]);
 

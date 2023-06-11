@@ -13,6 +13,7 @@
 .level {
   display: flex;
   gap: 10px;
+  align-items: flex-start;
 }
 .progression {
   all: unset;

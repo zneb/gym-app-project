@@ -20,7 +20,7 @@ export function Progression() {
   }
 
   return (
-    <>
+    <div className="overlay">
       <Title
         button={{
           icon: FaTimes,
@@ -66,6 +66,6 @@ export function Progression() {
           })
         )}
       </div>
-    </>
+    </div>
   );
 }

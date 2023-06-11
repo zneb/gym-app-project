@@ -1,11 +1,11 @@
+import { Outlet } from "react-router-dom";
 import { Routine } from "../components/Routine";
-import { Title } from "../components/Title";
 
 export function Home() {
   return (
     <>
-      <Title>Routine</Title>
       <Routine />
+      <Outlet />
     </>
   );
 }
