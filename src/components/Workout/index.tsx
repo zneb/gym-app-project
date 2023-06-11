@@ -54,7 +54,7 @@ export function Workout() {
         })}
         <button
           className={styles.end}
-          onClick={() => console.log(currentWorkout)}
+          onClick={() => console.log(currentWorkoutRef.current)}
         >
           End Workout
         </button>
