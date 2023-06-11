@@ -9,6 +9,7 @@ import { Home } from "./routes/home.tsx";
 import { Settings } from "./routes/settings.tsx";
 import { ProgressionPage } from "./routes/progression.tsx";
 import { Workout } from "./routes/workout.tsx";
+import { database } from "./assets/database.ts";
 
 const router = createBrowserRouter([
   {
@@ -20,7 +21,10 @@ const router = createBrowserRouter([
         path: "/",
         element: <Home />,
         children: [
-          { path: "/progression/:name", element: <ProgressionPage /> },
+          {
+            path: "/progression/:routine/:pair/:progression",
+            element: <ProgressionPage />,
+          },
           { path: "/workout/:name", element: <Workout /> },
         ],
       },
@@ -32,6 +36,8 @@ const router = createBrowserRouter([
     ],
   },
 ]);
+
+await database.seedDatabase();
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>

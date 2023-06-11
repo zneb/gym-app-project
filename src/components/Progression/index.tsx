@@ -1,19 +1,19 @@
 import { FaTimes } from "react-icons/fa";
-import {  getProgression } from "../../assets/database";
+import { database } from "../../assets/database";
 import { Title } from "../Title";
 import styles from "./Progression.module.css";
 import { useNavigate, useParams } from "react-router-dom";
 
 export function Progression() {
-  const { name: nameParam } = useParams();
-  const progression = getProgression(nameParam || "");
+  const { routine, pair, progression } = useParams();
+  const progressionData = database.getProgression(progression || "");
 
-  if (!progression) {
-    throw Error("Exercise doesn't exist");
+  if (!progressionData || !routine || !pair || !progression) {
+    throw Error("Exercise/routine doesn't exist");
   }
 
   const navigate = useNavigate();
-  const { name, exercises, progressions } = progression;
+  const { name, exercises, progressions } = progressionData;
 
   if (!progressions) {
     throw Error("Exercise has no progressions");
@@ -51,7 +51,15 @@ export function Progression() {
                       type="button"
                       className={styles.progression}
                       onClick={() => {
-                        alert("changed");
+                        database
+                          .updateProgression(
+                            routine as any,
+                            pair,
+                            progression,
+                            exercises[index].name
+                          )
+                          .then(() => navigate(-1))
+                          .catch((err) => alert(err));
                       }}
                     >
                       <div className={styles.icon}></div>
