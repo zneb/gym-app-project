@@ -4,6 +4,7 @@ import { useLocation } from "react-router-dom";
 import { Title } from "../Title";
 import { useEffect, useRef, useState } from "react";
 import { Exercise } from "./Exercise";
+import { Timer } from "./Timer";
 
 export function Workout() {
   const [data, setData] =
@@ -26,7 +27,7 @@ export function Workout() {
 
   return (
     <>
-      <Title>{name}</Title>
+      <Title left={<Timer />}>{name}</Title>
       <div className={styles.routine}>
         {workout.map(({ name: pair, sets, exercises }) => {
           const setsArr = Array.from(Array(sets).keys());
