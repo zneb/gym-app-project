@@ -1,25 +1,20 @@
 import styles from "./Routine.module.css";
 import { database } from "../../assets/database";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Title } from "../Title";
-import { useEffect, useState } from "react";
+import { useLiveQuery } from "dexie-react-hooks";
+import { db } from "../../models/db";
 
 export function Routine() {
-  const [data, setData] =
-    useState<Awaited<ReturnType<typeof database.getRoutine>>>();
-  const location = useLocation();
+  const routine = useLiveQuery(() =>
+    db.routines.where({ id: "recommended-routine" }).first()
+  );
 
-  useEffect(() => {
-    database
-      .getRoutine(database.getRoutines()[0].id)
-      .then((routine) => setData(routine));
-  }, [location.pathname]);
-
-  if (!data) {
+  if (!routine) {
     return null;
   }
 
-  const { name, workout } = data;
+  const { name, workout } = routine;
 
   return (
     <>
