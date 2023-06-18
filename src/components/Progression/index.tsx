@@ -3,19 +3,30 @@ import { database } from "../../assets/database";
 import { Title } from "../Title";
 import styles from "./Progression.module.css";
 import { useNavigate, useParams } from "react-router-dom";
+import { db } from "../../models/db";
+import { useLiveQuery } from "dexie-react-hooks";
 
 export function Progression() {
   const { routine, pair, progression } = useParams();
-  const progressionData = database.getProgression(progression || "");
+  const progressionData = useLiveQuery(
+    () => db.progressions.where({ id: progression }).first(),
+    [],
+    "loading"
+  );
 
   if (!progressionData || !routine || !pair || !progression) {
     throw Error("Exercise/routine doesn't exist");
   }
 
   const navigate = useNavigate();
+
+  if (progressionData === "loading") {
+    return null;
+  }
+
   const { name, exercises, progressions } = progressionData;
 
-  if (!progressions) {
+  if (progressions.length === 0) {
     throw Error("Exercise has no progressions");
   }
 
@@ -35,14 +46,14 @@ export function Progression() {
       <div className={styles.progressions}>
         {progressions.map((paths) =>
           paths.map((indexes) => {
-            if (typeof indexes === "number") {
+            if (typeof indexes === "string") {
               indexes = [indexes];
             }
 
             return (
               <div className={styles.level}>
-                {indexes.map((index) => {
-                  if (index === null) {
+                {indexes.map((name, index) => {
+                  if (name === null) {
                     return <div className={styles.progression} />;
                   }
 
@@ -56,16 +67,14 @@ export function Progression() {
                             routine as any,
                             pair,
                             progression,
-                            exercises[index].name
+                            exercises[index]
                           )
                           .then(() => navigate(-1))
                           .catch((err) => alert(err));
                       }}
                     >
                       <div className={styles.icon}></div>
-                      <span className={styles.name}>
-                        {exercises[index].name}
-                      </span>
+                      <span className={styles.name}>{exercises[index]}</span>
                     </button>
                   );
                 })}

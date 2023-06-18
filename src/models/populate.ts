@@ -66,8 +66,8 @@ export function populate() {
     { id: "squat", name: "Squat", reps: [5, 8], type: "reps" },
     { id: "split-squat", name: "Split Squat", reps: [5, 8], type: "reps" },
     {
-      id: "bulgerian-split-squat",
-      name: "Bulgerian Split Squat",
+      id: "bulgarian-split-squat",
+      name: "Bulgarian Split Squat",
       reps: [5, 8],
       type: "reps",
     },
@@ -503,7 +503,7 @@ export function populate() {
         "assisted-squat",
         "squat",
         "split-squat",
-        "bulgerian-split-squat",
+        "bulgarian-split-squat",
         "beginner-shrimp-squat",
         "stepup",
         "partial-rom-pistol-squat",
@@ -518,7 +518,7 @@ export function populate() {
           "assisted-squat",
           "squat",
           "split-squat",
-          "bulgerian-split-squat",
+          "bulgarian-split-squat",
           ["beginner-shrimp-squat", "stepup", "partial-rom-pistol-squat"],
           [
             "intermediate-shrimp-squat",
@@ -741,20 +741,20 @@ export function populate() {
           rest: 0,
           exercises: [
             {
-              progression: "Yuri's Shoulder Band Warmup",
-              exercise: "Yuri's Shoulder Band Warmup",
+              progression: "yuris-shoulder-band-warmup",
+              exercise: "yuris-shoulder-band-warmup",
             },
-            { progression: "Squat Sky Reaches", exercise: "Squat Sky Reaches" },
-            { progression: "GMB Wrist Prep", exercise: "GMB Wrist Prep" },
-            { progression: "Deadbugs", exercise: "Deadbugs" },
-            { progression: "Arch Hang", exercise: "Arch Hang" },
+            { progression: "squat-sky-reaches", exercise: "squat-sky-reaches" },
+            { progression: "gmb-wrist-prep", exercise: "gmb-wrist-prep" },
+            { progression: "deadbugs", exercise: "deadbugs" },
+            { progression: "arch-hang", exercise: "arch-hang" },
             {
-              progression: "Parallel Bar Support Hold",
-              exercise: "Parallel Bar Support Hold",
+              progression: "parallel-bar-support-hold",
+              exercise: "parallel-bar-support-hold",
             },
             {
-              progression: "Bulgarian Split Squat",
-              exercise: "Bulgarian Split Squat",
+              progression: "bulgarian-split-squat",
+              exercise: "bulgarian-split-squat",
             },
           ],
         },
@@ -765,12 +765,12 @@ export function populate() {
           rest: 90,
           exercises: [
             {
-              progression: "Pull-up Progression",
-              exercise: "Scapular Pull",
+              progression: "pullup-progression",
+              exercise: "scapular-pull",
             },
             {
-              progression: "Squat Progression",
-              exercise: "Assisted Squat",
+              progression: "squat-progression",
+              exercise: "assisted-squat",
             },
           ],
         },
@@ -781,12 +781,12 @@ export function populate() {
           rest: 90,
           exercises: [
             {
-              progression: "Dip Progression",
-              exercise: "Parallel Bar Support Hold",
+              progression: "dip-progression",
+              exercise: "parallel-bar-support-hold",
             },
             {
-              progression: "Hinge Progression",
-              exercise: "Romanian Deadlift",
+              progression: "hinge-progression",
+              exercise: "romanian-deadlift",
             },
           ],
         },
@@ -797,12 +797,12 @@ export function populate() {
           rest: 90,
           exercises: [
             {
-              progression: "Row Progression",
-              exercise: "Vertical Row",
+              progression: "row-progression",
+              exercise: "vertical-row",
             },
             {
-              progression: "Push-Up Progression",
-              exercise: "Vertical Push-up",
+              progression: "pushup-progression",
+              exercise: "vertical-pushup",
             },
           ],
         },
@@ -813,16 +813,16 @@ export function populate() {
           rest: 60,
           exercises: [
             {
-              progression: "Anti-extension Progression",
-              exercise: "Plank",
+              progression: "antiextension-progression",
+              exercise: "plank",
             },
             {
-              progression: "Anti-rotation Progression",
-              exercise: "Banded Pallof Press",
+              progression: "antirotation-progression",
+              exercise: "banded-pallof-press",
             },
             {
-              progression: "Extension Progression",
-              exercise: "Reverse Hyperextension",
+              progression: "extension-progression",
+              exercise: "reverse-hyperextension",
             },
           ],
         },
