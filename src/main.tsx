@@ -10,6 +10,15 @@ import { Settings } from "./routes/settings.tsx";
 import { ProgressionPage } from "./routes/progression.tsx";
 import { WorkoutPage } from "./routes/workout.tsx";
 import { database } from "./assets/database.ts";
+import { App } from "@capacitor/app";
+
+App.addListener("backButton", ({ canGoBack }) => {
+  if (canGoBack) {
+    window.history.back();
+  } else {
+    App.exitApp();
+  }
+});
 
 const router = createBrowserRouter([
   {
