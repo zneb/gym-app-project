@@ -20,7 +20,7 @@ export function Exercise({
     }[];
   }>;
 }) {
-  const progressionData = database.getProgression(progression);
+  // const progressionData = database.getProgression(progression);
   const exerciseData = database.getExercise(progression, exercise);
 
   const [completed, setCompleted] = useState<{
