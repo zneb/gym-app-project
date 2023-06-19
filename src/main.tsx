@@ -9,7 +9,6 @@ import { Home } from "./routes/home.tsx";
 import { Settings } from "./routes/settings.tsx";
 import { ProgressionPage } from "./routes/progression.tsx";
 import { WorkoutPage } from "./routes/workout.tsx";
-import { database } from "./assets/database.ts";
 import { App } from "@capacitor/app";
 
 App.addListener("backButton", ({ canGoBack }) => {
@@ -45,8 +44,6 @@ const router = createBrowserRouter([
     ],
   },
 ]);
-
-database.seedDatabase();
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>

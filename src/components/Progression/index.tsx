@@ -1,5 +1,4 @@
 import { FaTimes } from "react-icons/fa";
-import { database } from "../../assets/database";
 import { Title } from "../Title";
 import styles from "./Progression.module.css";
 import { useNavigate, useParams } from "react-router-dom";
@@ -18,9 +17,22 @@ export function Progression() {
     throw Error("Exercise/routine doesn't exist");
   }
 
+  const exerciseData = useLiveQuery(
+    async () =>
+      db.exercises.bulkGet(
+        progressionData !== "loading" ? progressionData.exercises : []
+      ),
+    [progressionData],
+    "loading"
+  );
+
+  if (!exerciseData) {
+    throw Error("Exercises not found");
+  }
+
   const navigate = useNavigate();
 
-  if (progressionData === "loading") {
+  if (progressionData === "loading" || exerciseData === "loading") {
     return null;
   }
 
@@ -46,14 +58,14 @@ export function Progression() {
       <div className={styles.progressions}>
         {progressions.map((paths) =>
           paths.map((indexes) => {
-            if (typeof indexes === "string") {
+            if (typeof indexes === "number") {
               indexes = [indexes];
             }
 
             return (
               <div className={styles.level}>
-                {indexes.map((name, index) => {
-                  if (name === null) {
+                {indexes.map((index) => {
+                  if (index === null) {
                     return <div className={styles.progression} />;
                   }
 
@@ -62,19 +74,20 @@ export function Progression() {
                       type="button"
                       className={styles.progression}
                       onClick={() => {
-                        database
-                          .updateProgression(
-                            routine as any,
-                            pair,
-                            progression,
-                            exercises[index]
-                          )
+                        updateProgression(
+                          routine,
+                          pair,
+                          progression,
+                          exercises[index]
+                        )
                           .then(() => navigate(-1))
                           .catch((err) => alert(err));
                       }}
                     >
                       <div className={styles.icon}></div>
-                      <span className={styles.name}>{exercises[index]}</span>
+                      <span className={styles.name}>
+                        {exerciseData[index]?.name ?? "no exercise"}
+                      </span>
                     </button>
                   );
                 })}
@@ -85,4 +98,29 @@ export function Progression() {
       </div>
     </div>
   );
+}
+
+async function updateProgression(
+  routine: string,
+  pair: string,
+  progressionName: string,
+  newExercise: string
+) {
+  const data = await db.routines.where({ id: routine }).first();
+
+  if (!data) {
+    throw Error("Routine not found");
+  }
+
+  const exercise = data.workout
+    .find(({ name }) => name === pair)
+    ?.exercises.find(({ progression }) => progression === progressionName);
+
+  if (!exercise) {
+    throw Error("Exercise not found");
+  }
+
+  exercise.exercise = newExercise;
+
+  await db.routines.update(routine, { workout: data.workout });
 }

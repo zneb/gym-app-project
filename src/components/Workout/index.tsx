@@ -1,29 +1,23 @@
 import styles from "./Workout.module.css";
-import { database } from "../../assets/database";
-import { useLocation } from "react-router-dom";
 import { Title } from "../Title";
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 import { Exercise } from "./Exercise";
 import { Timer } from "./Timer";
+import { useLiveQuery } from "dexie-react-hooks";
+import { db } from "../../models/db";
 
 export function Workout() {
-  const [data, setData] =
-    useState<Awaited<ReturnType<typeof database.getRoutine>>>();
-  const location = useLocation();
+  const routine = useLiveQuery(() =>
+    db.routines.where({ id: "recommended-routine" }).first()
+  );
 
-  useEffect(() => {
-    database
-      .getRoutine(database.getRoutines()[0].id)
-      .then((routine) => setData(routine));
-  }, [location.pathname]);
+  const currentWorkoutRef = useRef(createWorkout("recommended-routine"));
 
-  const currentWorkoutRef = useRef(database.createWorkout("rr"));
-
-  if (!data) {
+  if (!routine) {
     return null;
   }
 
-  const { name, workout } = data;
+  const { name, workout } = routine;
 
   return (
     <>
@@ -62,4 +56,16 @@ export function Workout() {
       </div>
     </>
   );
+}
+
+function createWorkout(id: string) {
+  return {
+    id,
+    exercises: [] as {
+      progression: string;
+      exercise: string;
+      reps: number;
+      time: Date;
+    }[],
+  };
 }

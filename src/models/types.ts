@@ -14,7 +14,7 @@ export interface Progression {
   id: ProgressionId;
   name: string;
   exercises: ExerciseId[];
-  progressions: (string | (string | null)[])[][];
+  progressions: (number | (number | null)[])[][];
 }
 
 export interface Routine {

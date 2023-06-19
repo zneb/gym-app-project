@@ -1,7 +1,8 @@
 import { FaCheck } from "react-icons/fa";
-import { database } from "../../assets/database";
 import styles from "./Workout.module.css";
 import { useRef, useState } from "react";
+import { useLiveQuery } from "dexie-react-hooks";
+import { db } from "../../models/db";
 
 export function Exercise({
   progression,
@@ -11,7 +12,7 @@ export function Exercise({
   progression: string;
   exercise: string;
   currentWorkout: React.MutableRefObject<{
-    id: "rr";
+    id: string;
     exercises: {
       progression: string;
       exercise: string;
@@ -20,8 +21,9 @@ export function Exercise({
     }[];
   }>;
 }) {
-  // const progressionData = database.getProgression(progression);
-  const exerciseData = database.getExercise(progression, exercise);
+  const exerciseData = useLiveQuery(() =>
+    db.exercises.where({ id: exercise }).first()
+  );
 
   const [completed, setCompleted] = useState<{
     index: number;
@@ -64,6 +66,7 @@ export function Exercise({
               pattern="[0-9]*"
               defaultValue={reps[reps.length - 1]}
               ref={repsRef}
+              onFocus={(event) => event.target.select()}
             />
             <button
               onClick={() => {
