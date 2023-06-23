@@ -1,9 +1,9 @@
-import { Workout } from "../components/Workout";
+import { WorkoutComponent } from "../components/Workout";
 
 export function WorkoutPage() {
   return (
     <div className="overlay">
-      <Workout />
+      <WorkoutComponent />
     </div>
   );
 }

@@ -1,12 +1,15 @@
 .container {
   position: relative;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  border-bottom: 2px #333333 solid;
+  width: 100%;
+  justify-content: center;
 }
 
 .title {
-  text-align: center;
   margin: 0;
-  padding: 10px 0;
-  border-bottom: 2px #333333 solid;
 }
 
 .left {

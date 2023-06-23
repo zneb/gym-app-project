@@ -34,7 +34,7 @@ export interface Workout {
   exercises: {
     progression: string;
     exercise: string;
-    reps: number;
+    count: number;
     time: Date;
   }[];
 }
