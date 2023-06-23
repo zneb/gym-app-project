@@ -1,13 +1,10 @@
 import { useEffect, useMemo, useState } from "react";
 import styles from "./Workout.module.css";
+import { formatTime } from "./formatTime";
 
 const SECOND = 1000;
 const MINUTE = SECOND * 60;
 const HOUR = MINUTE * 60;
-
-function formatTime(time: number) {
-  return `${Math.floor(time)}`.padStart(2, "0");
-}
 
 export function Time() {
   const startTime = useMemo(() => Date.now(), []);

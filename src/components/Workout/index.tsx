@@ -8,9 +8,10 @@ import { db } from "../../models/db";
 import { Workout } from "../../models/types";
 import { useNavigate } from "react-router";
 import { BiExit } from "react-icons/bi";
-import { Timer } from "./Timer";
+import { useTimer } from "./useTimer";
 
 export function WorkoutComponent() {
+  const Timer = useTimer();
   const navigate = useNavigate();
   const routine = useLiveQuery(() =>
     db.routines.where({ id: "recommended-routine" }).first()
