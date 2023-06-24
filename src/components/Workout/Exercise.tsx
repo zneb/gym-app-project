@@ -9,10 +9,12 @@ export function Exercise({
   progression,
   exercise,
   currentWorkout,
+  setTimer,
 }: {
   progression: string;
   exercise: string;
   currentWorkout: React.MutableRefObject<Workout>;
+  setTimer(time: number, autoTick: boolean): void;
 }) {
   const exerciseData = useLiveQuery(() =>
     db.exercises.where({ id: exercise }).first()
@@ -73,6 +75,8 @@ export function Exercise({
                   exercise: currentExercise,
                   index: currentWorkout.current.exercises.length - 1,
                 });
+
+                setTimer(90, true);
               }}
             >
               <FaCheck />

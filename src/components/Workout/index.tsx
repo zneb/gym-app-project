@@ -1,5 +1,4 @@
 import styles from "./Workout.module.css";
-import { Title } from "../Title";
 import { useRef } from "react";
 import { Exercise } from "./Exercise";
 import { Time } from "./Time";
@@ -11,7 +10,7 @@ import { BiExit } from "react-icons/bi";
 import { useTimer } from "./useTimer";
 
 export function WorkoutComponent() {
-  const Timer = useTimer();
+  const { Timer, showTimer, setTimer, hideTimer } = useTimer();
   const navigate = useNavigate();
   const routine = useLiveQuery(() =>
     db.routines.where({ id: "recommended-routine" }).first()
@@ -40,7 +39,9 @@ export function WorkoutComponent() {
       <div className={styles.container}>
         <Time />
         <div className={styles.flex}>
-          <button>Start Timer</button>
+          <button onClick={() => (showTimer ? hideTimer() : setTimer(30))}>
+            {showTimer ? "Hide Timer" : "Set Timer"}
+          </button>
           <button className={styles.exit} onClick={endWorkout}>
             <BiExit />
           </button>
@@ -63,6 +64,7 @@ export function WorkoutComponent() {
                       progression={progression}
                       exercise={exercise}
                       currentWorkout={currentWorkoutRef}
+                      setTimer={setTimer}
                       key={progression + exercise + set}
                     />
                   ))}
@@ -82,7 +84,7 @@ export function WorkoutComponent() {
 
 function createWorkout(routine: string): Workout {
   return {
-    id: "randumb",
+    date: new Date(),
     routine,
     exercises: [],
   };

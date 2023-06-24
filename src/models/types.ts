@@ -1,7 +1,6 @@
 type ExerciseId = string;
 type ProgressionId = string;
 type RoutineId = string;
-type WorkoutId = string;
 
 export interface Exercise {
   id: ExerciseId;
@@ -29,7 +28,7 @@ export interface Routine {
 }
 
 export interface Workout {
-  id: WorkoutId;
+  date: Date;
   routine: RoutineId;
   exercises: {
     progression: string;
