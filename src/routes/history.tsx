@@ -12,11 +12,11 @@ export function History() {
       <div className="page">
         <div style={{ overflowY: "scroll" }}>
           {workouts.map(({ date, exercises }) => (
-            <div>
-              <span>{date.toISOString()}</span>
+            <div key={date}>
+              <span>{date}</span>
               <div>
-                {exercises.map(({ progression, exercise, count }) => (
-                  <div>
+                {exercises.map(({ progression, exercise, count }, index) => (
+                  <div key={index}>
                     <div>{progression}</div>
                     <div>{exercise}</div>
                     <div>{count}</div>

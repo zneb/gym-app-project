@@ -28,12 +28,12 @@ export interface Routine {
 }
 
 export interface Workout {
-  date: Date;
+  date: string;
   routine: RoutineId;
   exercises: {
     progression: string;
     exercise: string;
     count: number;
-    time: Date;
+    time: string;
   }[];
 }

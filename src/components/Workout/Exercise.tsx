@@ -66,7 +66,7 @@ export function Exercise({
                   count:
                     parseInt(repsRef.current?.value || "0", 10) ??
                     reps[reps.length - 1],
-                  time: new Date(),
+                  time: new Date().toISOString(),
                 };
 
                 currentWorkout.current.exercises.push(currentExercise);

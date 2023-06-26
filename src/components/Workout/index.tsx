@@ -1,5 +1,5 @@
 import styles from "./Workout.module.css";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { Exercise } from "./Exercise";
 import { Time } from "./Time";
 import { useLiveQuery } from "dexie-react-hooks";
@@ -10,29 +10,35 @@ import { BiExit } from "react-icons/bi";
 import { useTimer } from "./useTimer";
 
 export function WorkoutComponent() {
+  const [isExiting, setIsExiting] = useState(false);
   const { Timer, showTimer, setTimer, hideTimer } = useTimer();
   const navigate = useNavigate();
   const routine = useLiveQuery(() =>
     db.routines.where({ id: "recommended-routine" }).first()
   );
 
+  const currentWorkoutRef = useRef(createWorkout("recommended-routine"));
+
   const endWorkout = () => {
     if (!currentWorkoutRef.current.exercises.length) {
       navigate(-1);
       return;
     }
-    db.workouts.add(currentWorkoutRef.current).then(() => {
-      navigate(-1);
-    });
+    setIsExiting(true);
+    console.log(currentWorkoutRef.current);
+    db.workouts
+      .add(currentWorkoutRef.current)
+      .then(() => {
+        navigate(-1);
+      })
+      .catch(() => setIsExiting(false));
   };
-
-  const currentWorkoutRef = useRef(createWorkout("recommended-routine"));
 
   if (!routine) {
     return null;
   }
 
-  const { name, workout } = routine;
+  const { workout } = routine;
 
   return (
     <>
@@ -42,7 +48,11 @@ export function WorkoutComponent() {
           <button onClick={() => (showTimer ? hideTimer() : setTimer(30))}>
             {showTimer ? "Hide Timer" : "Set Timer"}
           </button>
-          <button className={styles.exit} onClick={endWorkout}>
+          <button
+            className={styles.exit}
+            onClick={endWorkout}
+            disabled={isExiting}
+          >
             <BiExit />
           </button>
         </div>
@@ -74,7 +84,11 @@ export function WorkoutComponent() {
           );
         })}
         <Timer />
-        <button className={styles.end} onClick={endWorkout}>
+        <button
+          className={styles.end}
+          onClick={endWorkout}
+          disabled={isExiting}
+        >
           End Workout
         </button>
       </div>
@@ -84,7 +98,7 @@ export function WorkoutComponent() {
 
 function createWorkout(routine: string): Workout {
   return {
-    date: new Date(),
+    date: new Date().toISOString(),
     routine,
     exercises: [],
   };
