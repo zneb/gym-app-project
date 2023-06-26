@@ -25,7 +25,6 @@ export function WorkoutComponent() {
       return;
     }
     setIsExiting(true);
-    console.log(currentWorkoutRef.current);
     db.workouts
       .add(currentWorkoutRef.current)
       .then(() => {

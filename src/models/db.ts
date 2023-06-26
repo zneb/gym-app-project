@@ -10,12 +10,17 @@ export class AppDB extends Dexie {
 
   constructor() {
     super("AppDB");
-    this.version(1).stores({
+    this.version(2).stores({
       exercises: "id",
       progressions: "id",
       routines: "id",
       workouts: "date",
     });
+  }
+
+  resetData() {
+    db.delete();
+    location.reload();
   }
 }
 
