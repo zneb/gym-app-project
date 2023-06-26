@@ -58,6 +58,12 @@ export function populate() {
       type: "reps",
     },
     {
+      id: "archer-pullup",
+      name: "Archer Pull-up",
+      reps: [5, 8],
+      type: "reps",
+    },
+    {
       id: "assisted-squat",
       name: "Assisted Squat",
       reps: [5, 8],
@@ -480,8 +486,9 @@ export function populate() {
         "lsit-pullup",
         "arch-body-pullup",
         "typewriter-pullup",
+        "archer-pullup",
       ],
-      progressions: [[0, 1, 2, 3, [4, 5, 6, 7]]],
+      progressions: [[0, 1, 2, 3, [4, 5, 6, 7], [null, null, null, 8]]],
     },
     {
       id: "squat-progression",
@@ -536,12 +543,12 @@ export function populate() {
       ],
       progressions: [
         [
-          6,
-          7,
-          [8, 9, 10, 11],
-          [12, 13, null, 14],
-          [15, null, null, 16],
-          [null, null, null, 17],
+          0,
+          1,
+          [2, 3, 4, 5],
+          [6, 7, null, 8],
+          [9, null, null, 10],
+          [null, null, null, 11],
         ],
       ],
     },
