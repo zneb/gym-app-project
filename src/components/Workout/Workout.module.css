@@ -113,7 +113,64 @@
   border-radius: 8px;
 }
 
-.timer {
+.container {
+  position: relative;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  border-bottom: 2px #333333 solid;
+  width: 100%;
+  justify-content: space-between;
+  padding: 0 20px;
+}
+
+.time {
   font-weight: 600;
   letter-spacing: 0.1em;
+}
+
+.exit {
+  all: unset;
+  background: var(--accent-color);
+  width: 45px;
+  height: 45px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  font-size: 1.5em;
+}
+
+.flex {
+  display: flex;
+  gap: 6px;
+}
+
+.timer {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  right: 20px;
+  background: #202020;
+}
+
+.timer {
+  display: flex;
+  justify-content: space-between;
+  height: 60px;
+  align-items: center;
+  border-radius: 20px;
+  padding: 10px;
+}
+
+.timerEdit {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.timeDisplay {
+  font-weight: 600;
+  font-size: 1.3rem;
+  font-family: monospace;
 }

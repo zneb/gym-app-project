@@ -1,15 +1,12 @@
 import { useEffect, useMemo, useState } from "react";
 import styles from "./Workout.module.css";
+import { formatTime } from "./formatTime";
 
 const SECOND = 1000;
 const MINUTE = SECOND * 60;
 const HOUR = MINUTE * 60;
 
-function formatTime(time: number) {
-  return `${Math.floor(time)}`.padStart(2, "0");
-}
-
-export function Timer() {
+export function Time() {
   const startTime = useMemo(() => Date.now(), []);
   const [elapsed, setElapsed] = useState(0);
 
@@ -28,7 +25,7 @@ export function Timer() {
   const minutes = formatTime((elapsed / MINUTE) % 60);
   const seconds = formatTime((elapsed / SECOND) % 60);
   return (
-    <div className={styles.timer}>
+    <div className={styles.time}>
       {hours && `${hours}:`}
       {minutes}:{seconds}
     </div>

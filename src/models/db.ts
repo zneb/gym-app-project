@@ -14,7 +14,7 @@ export class AppDB extends Dexie {
       exercises: "id",
       progressions: "id",
       routines: "id",
-      workouts: "id",
+      workouts: "date",
     });
   }
 }

@@ -1,15 +1,30 @@
 import styles from "./Workout.module.css";
-import { Title } from "../Title";
 import { useRef } from "react";
 import { Exercise } from "./Exercise";
-import { Timer } from "./Timer";
+import { Time } from "./Time";
 import { useLiveQuery } from "dexie-react-hooks";
 import { db } from "../../models/db";
+import { Workout } from "../../models/types";
+import { useNavigate } from "react-router";
+import { BiExit } from "react-icons/bi";
+import { useTimer } from "./useTimer";
 
-export function Workout() {
+export function WorkoutComponent() {
+  const { Timer, showTimer, setTimer, hideTimer } = useTimer();
+  const navigate = useNavigate();
   const routine = useLiveQuery(() =>
     db.routines.where({ id: "recommended-routine" }).first()
   );
+
+  const endWorkout = () => {
+    if (!currentWorkoutRef.current.exercises.length) {
+      navigate(-1);
+      return;
+    }
+    db.workouts.add(currentWorkoutRef.current).then(() => {
+      navigate(-1);
+    });
+  };
 
   const currentWorkoutRef = useRef(createWorkout("recommended-routine"));
 
@@ -21,7 +36,17 @@ export function Workout() {
 
   return (
     <>
-      <Title left={<Timer />}>{name}</Title>
+      <div className={styles.container}>
+        <Time />
+        <div className={styles.flex}>
+          <button onClick={() => (showTimer ? hideTimer() : setTimer(30))}>
+            {showTimer ? "Hide Timer" : "Set Timer"}
+          </button>
+          <button className={styles.exit} onClick={endWorkout}>
+            <BiExit />
+          </button>
+        </div>
+      </div>
       <div className={styles.routine}>
         {workout.map(({ name: pair, sets, exercises }) => {
           const setsArr = Array.from(Array(sets).keys());
@@ -39,6 +64,7 @@ export function Workout() {
                       progression={progression}
                       exercise={exercise}
                       currentWorkout={currentWorkoutRef}
+                      setTimer={setTimer}
                       key={progression + exercise + set}
                     />
                   ))}
@@ -47,10 +73,8 @@ export function Workout() {
             </div>
           );
         })}
-        <button
-          className={styles.end}
-          onClick={() => console.log(currentWorkoutRef.current)}
-        >
+        <Timer />
+        <button className={styles.end} onClick={endWorkout}>
           End Workout
         </button>
       </div>
@@ -58,14 +82,10 @@ export function Workout() {
   );
 }
 
-function createWorkout(id: string) {
+function createWorkout(routine: string): Workout {
   return {
-    id,
-    exercises: [] as {
-      progression: string;
-      exercise: string;
-      reps: number;
-      time: Date;
-    }[],
+    date: new Date(),
+    routine,
+    exercises: [],
   };
 }

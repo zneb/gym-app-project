@@ -3,23 +3,18 @@ import styles from "./Workout.module.css";
 import { useRef, useState } from "react";
 import { useLiveQuery } from "dexie-react-hooks";
 import { db } from "../../models/db";
+import { Workout } from "../../models/types";
 
 export function Exercise({
   progression,
   exercise,
   currentWorkout,
+  setTimer,
 }: {
   progression: string;
   exercise: string;
-  currentWorkout: React.MutableRefObject<{
-    id: string;
-    exercises: {
-      progression: string;
-      exercise: string;
-      reps: number;
-      time: Date;
-    }[];
-  }>;
+  currentWorkout: React.MutableRefObject<Workout>;
+  setTimer(time: number, autoTick: boolean): void;
 }) {
   const exerciseData = useLiveQuery(() =>
     db.exercises.where({ id: exercise }).first()
@@ -27,12 +22,7 @@ export function Exercise({
 
   const [completed, setCompleted] = useState<{
     index: number;
-    exercise: {
-      progression: string;
-      exercise: string;
-      reps: number;
-      time: Date;
-    };
+    exercise: Workout["exercises"][0];
   } | null>(null);
 
   const repsRef = useRef<HTMLInputElement | null>(null);
@@ -57,7 +47,7 @@ export function Exercise({
 
       <div className={styles.reps}>
         {completed ? (
-          <div className={styles.completed}>{completed.exercise.reps}</div>
+          <div className={styles.completed}>{completed.exercise.count}</div>
         ) : (
           <>
             <input
@@ -73,7 +63,7 @@ export function Exercise({
                 const currentExercise = {
                   progression,
                   exercise,
-                  reps:
+                  count:
                     parseInt(repsRef.current?.value || "0", 10) ??
                     reps[reps.length - 1],
                   time: new Date(),
@@ -85,6 +75,8 @@ export function Exercise({
                   exercise: currentExercise,
                   index: currentWorkout.current.exercises.length - 1,
                 });
+
+                setTimer(90, true);
               }}
             >
               <FaCheck />
