@@ -156,21 +156,34 @@
 
 .timer {
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
-  height: 60px;
   align-items: center;
   border-radius: 20px;
   padding: 10px;
 }
 
 .timerEdit {
+  width: 100%;
   display: flex;
-  align-items: center;
-  gap: 8px;
+  gap: 4px;
+}
+
+.startButton {
+  flex-grow: 1;
+  background: var(--accent-color);
+}
+
+.timerButton {
+  padding: 0.6em 0;
+  width: 55px;
 }
 
 .timeDisplay {
+  position: relative;
   font-weight: 600;
-  font-size: 1.3rem;
+  font-size: 2rem;
+  padding: 10px;
   font-family: monospace;
+  text-align: center;
 }

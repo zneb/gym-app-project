@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import styles from "./Workout.module.css";
 import { formatTime } from "./formatTime";
 
@@ -39,34 +39,55 @@ function Timer({
 
   return (
     <div className={styles.timer}>
+      <div className={styles.timeDisplay}>
+        {mins}:{secs}
+      </div>
       <div className={styles.timerEdit}>
         <button
+          className={styles.timerButton}
+          onClick={() => {
+            setCurrentTime(currentTime - 10);
+          }}
+          disabled={currentTime <= 10}
+        >
+          -10
+        </button>
+        <button
+          className={styles.timerButton}
           onClick={() => {
             setCurrentTime(currentTime - 5);
           }}
           disabled={currentTime <= 5}
         >
-          -
+          -5
         </button>
-        <div className={styles.timeDisplay}>
-          {mins}:{secs}
-        </div>
         <button
+          className={styles.startButton}
+          onClick={() => {
+            setTicking(!ticking);
+          }}
+        >
+          {ticking ? "Stop" : "Start"}
+        </button>
+        <button
+          className={styles.timerButton}
           onClick={() => {
             setCurrentTime(currentTime + 5);
           }}
           disabled={currentTime >= 12 * 60}
         >
-          +
+          +5
+        </button>
+        <button
+          className={styles.timerButton}
+          onClick={() => {
+            setCurrentTime(currentTime + 10);
+          }}
+          disabled={currentTime >= 12 * 60}
+        >
+          +10
         </button>
       </div>
-      <button
-        onClick={() => {
-          setTicking(!ticking);
-        }}
-      >
-        {ticking ? "Stop" : "Start"}
-      </button>
     </div>
   );
 }
