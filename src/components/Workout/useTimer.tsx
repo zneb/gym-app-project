@@ -1,42 +1,37 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useReducer, useState } from "react";
 import styles from "./Workout.module.css";
 import { formatTime } from "./formatTime";
 
 function Timer({
-  ticking,
-  setTicking,
-  currentTime,
-  setCurrentTime,
+  state,
+  dispatch,
 }: {
-  ticking: boolean;
-  setTicking: React.Dispatch<React.SetStateAction<boolean>>;
-  currentTime: number;
-  setCurrentTime: React.Dispatch<React.SetStateAction<number>>;
+  state: stateType;
+  dispatch: React.Dispatch<actionType>;
 }) {
-  const intervalRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const [elapsed, setElapsed] = useState(() =>
+    getElapsed(state.startedTime, state.timeLeft)
+  );
 
   useEffect(() => {
-    if (!ticking) {
-      if (intervalRef.current) {
-        clearInterval(intervalRef.current);
-      }
-      return;
+    const interval = state.startedTime
+      ? setInterval(
+          () => setElapsed(getElapsed(state.startedTime, state.timeLeft)),
+          1000
+        )
+      : undefined;
+
+    return () => clearInterval(interval);
+  }, [state.startedTime, state.timeLeft]);
+
+  useEffect(() => {
+    if (elapsed < 0) {
+      dispatch({ type: "hide" });
     }
-    intervalRef.current = setInterval(
-      () => setCurrentTime((ct) => ct - 1),
-      1000
-    );
+  }, [dispatch, elapsed]);
 
-    return () => {
-      if (intervalRef.current) {
-        clearInterval(intervalRef.current);
-      }
-    };
-  }, [ticking, setCurrentTime]);
-
-  const mins = formatTime(Math.floor(currentTime / 60));
-  const secs = formatTime(currentTime % 60);
-
+  const mins = formatTime(Math.floor(elapsed / 60) % 60);
+  const secs = formatTime(elapsed % 60);
   return (
     <div className={styles.timer}>
       <div className={styles.timeDisplay}>
@@ -46,44 +41,44 @@ function Timer({
         <button
           className={styles.timerButton}
           onClick={() => {
-            setCurrentTime(currentTime - 10);
+            dispatch({ type: "decrement", time: 10 });
           }}
-          disabled={currentTime <= 10}
+          disabled={state.timeLeft <= 10}
         >
           -10
         </button>
         <button
           className={styles.timerButton}
           onClick={() => {
-            setCurrentTime(currentTime - 5);
+            dispatch({ type: "decrement", time: 5 });
           }}
-          disabled={currentTime <= 5}
+          disabled={state.timeLeft <= 5}
         >
           -5
         </button>
         <button
           className={styles.startButton}
           onClick={() => {
-            setTicking(!ticking);
+            dispatch({ type: state.startedTime ? "stop" : "start" });
           }}
         >
-          {ticking ? "Stop" : "Start"}
+          {state.startedTime ? "Stop" : "Start"}
         </button>
         <button
           className={styles.timerButton}
           onClick={() => {
-            setCurrentTime(currentTime + 5);
+            dispatch({ type: "increment", time: 5 });
           }}
-          disabled={currentTime >= 12 * 60}
+          disabled={state.timeLeft >= 12 * 60}
         >
           +5
         </button>
         <button
           className={styles.timerButton}
           onClick={() => {
-            setCurrentTime(currentTime + 10);
+            dispatch({ type: "increment", time: 10 });
           }}
-          disabled={currentTime >= 12 * 60}
+          disabled={state.timeLeft >= 12 * 60}
         >
           +10
         </button>
@@ -93,39 +88,71 @@ function Timer({
 }
 
 export function useTimer() {
-  const [showTimer, setShowTimer] = useState(false);
-  const [ticking, setTicking] = useState(false);
-  const [currentTime, setCurrentTime] = useState(30);
-
-  useEffect(() => {
-    if (currentTime <= 0) {
-      setShowTimer(false);
-    }
-  }, [currentTime, setTicking]);
-
-  const setTimer = (time: number, autoTick = false) => {
-    setCurrentTime(time);
-    setTicking(autoTick);
-    setShowTimer(true);
-  };
-
-  const hideTimer = () => {
-    setTicking(false);
-    setShowTimer(false);
-  };
+  const [state, dispatch] = useReducer(timerReducer, {
+    show: false,
+    startedTime: null,
+    timeLeft: 30,
+  });
 
   return {
-    Timer: () =>
-      showTimer && (
-        <Timer
-          ticking={ticking}
-          setTicking={setTicking}
-          currentTime={currentTime}
-          setCurrentTime={setCurrentTime}
-        />
-      ),
-    showTimer,
-    setTimer,
-    hideTimer,
+    Timer: () => state.show && <Timer state={state} dispatch={dispatch} />,
+    showTimer: state.show,
+    setTimer: (time: number, start?: boolean) => {
+      dispatch({ type: "set", time });
+      dispatch({ type: "show" });
+      if (start) {
+        dispatch({ type: "start" });
+      }
+    },
+    hideTimer: () => dispatch({ type: "hide" }),
   };
 }
+
+function timerReducer(state: stateType, action: actionType) {
+  switch (action.type) {
+    case "show":
+      return { ...state, show: true, timeLeft: action.time ?? state.timeLeft };
+    case "hide":
+      return {
+        show: false,
+        startedTime: null,
+        timeLeft: 30,
+      };
+    case "start":
+      return {
+        ...state,
+        startedTime: Date.now(),
+      };
+    case "stop":
+      return {
+        ...state,
+        startedTime: null,
+        timeLeft: getElapsed(state.startedTime, state.timeLeft),
+      };
+    case "set":
+      return { ...state, timeLeft: action.time };
+    case "increment":
+      return { ...state, timeLeft: state.timeLeft + action.time };
+    case "decrement":
+      return { ...state, timeLeft: state.timeLeft - action.time };
+  }
+}
+
+function getElapsed(startedTime: number | null, timeLeft: number) {
+  return startedTime
+    ? timeLeft - Math.floor((Date.now() - startedTime) / 1000)
+    : timeLeft;
+}
+
+type stateType = {
+  show: boolean;
+  startedTime: number | null;
+  timeLeft: number;
+};
+
+type actionType =
+  | {
+      type: "hide" | "start" | "stop";
+    }
+  | { type: "set" | "increment" | "decrement"; time: number }
+  | { type: "show"; time?: number };

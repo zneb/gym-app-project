@@ -17,7 +17,7 @@ export function Time() {
     );
 
     return () => clearInterval(interval);
-  });
+  }, [startTime]);
 
   const hoursNumber = elapsed / HOUR;
 
