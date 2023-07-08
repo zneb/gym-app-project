@@ -57,7 +57,7 @@ export function WorkoutComponent() {
         </div>
       </div>
       <div className={styles.routine}>
-        {workout.map(({ name: pair, sets, exercises }) => {
+        {workout.map(({ name: pair, sets, rest, exercises }) => {
           const setsArr = Array.from(Array(sets).keys());
           return (
             <div className={styles.group} key={pair}>
@@ -74,6 +74,7 @@ export function WorkoutComponent() {
                       exercise={exercise}
                       currentWorkout={currentWorkoutRef}
                       setTimer={setTimer}
+                      rest={rest}
                       key={progression + exercise + set}
                     />
                   ))}

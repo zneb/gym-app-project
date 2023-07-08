@@ -4,7 +4,7 @@ import { Root } from "./routes/root.tsx";
 import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { ErrorPage } from "./routes/error-page.tsx";
-import { History } from "./routes/history.tsx";
+import { HistoryPage } from "./routes/history.tsx";
 import { Home } from "./routes/home.tsx";
 import { Settings } from "./routes/settings.tsx";
 import { ProgressionPage } from "./routes/progression.tsx";
@@ -38,7 +38,7 @@ const router = createBrowserRouter([
       },
       {
         path: "history",
-        element: <History />,
+        element: <HistoryPage />,
       },
       { path: "settings", element: <Settings /> },
     ],
