@@ -7,6 +7,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 0 10px;
 }
 .date {
   font-size: 1.5rem;
@@ -19,10 +20,42 @@
   flex-direction: column;
   gap: 6px;
 }
+
 .exercise {
   display: flex;
   justify-content: space-between;
   background: #343434;
   padding: 10px 20px;
   border-radius: 10px;
+}
+
+.empty {
+  text-align: center;
+}
+
+.week {
+  display: flex;
+  justify-content: space-between;
+  padding: 14px;
+}
+
+.weekday {
+  text-align: center;
+}
+
+.daytext {
+  font-size: 0.7rem;
+}
+
+.weeknumber {
+  border: 2px #444 solid;
+  border-radius: 20px;
+  width: 30px;
+  height: 30px;
+  color: #b3b3b3;
+}
+
+.hasworkout {
+  border-color: #22d793;
+  color: #22d793;
 }

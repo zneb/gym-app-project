@@ -20,7 +20,7 @@ export function WorkoutComponent() {
   const currentWorkoutRef = useRef(createWorkout("recommended-routine"));
 
   const endWorkout = () => {
-    if (!confirm("End workout")) {
+    if (!confirm("Are you sure you want to end this workout?")) {
       return;
     }
 

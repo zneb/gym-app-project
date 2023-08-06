@@ -5,12 +5,19 @@ import styles from "./History.module.css";
 import { ExerciseLog } from "./ExerciseLog";
 import { FaCaretLeft, FaCaretRight } from "react-icons/fa";
 import { useState } from "react";
+import { Week } from "./Week";
 
 export function History() {
   const [currentWorkout, setCurrentWorkout] = useState(0);
   const workouts = useLiveQuery(() => db.workouts.reverse().toArray());
 
-  if (!workouts) return null;
+  if (!workouts?.length)
+    return (
+      <>
+        <Title>History</Title>
+        <p className={styles.empty}>No workouts</p>
+      </>
+    );
 
   const workoutData = workouts[currentWorkout];
 
@@ -18,6 +25,7 @@ export function History() {
     <>
       <Title>History</Title>
       <div className="page">
+        <Week workouts={workouts.slice(-10)} />
         <div className={styles.dates}>
           <button
             onClick={() => setCurrentWorkout(currentWorkout + 1)}
