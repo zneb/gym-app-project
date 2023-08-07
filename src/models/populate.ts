@@ -1,6 +1,12 @@
 import { db } from "./db";
 
 export function populate() {
+  populateExercises();
+  populateProgressions();
+  populateRoutines();
+}
+
+function populateExercises() {
   db.exercises.bulkAdd([
     {
       id: "yuris-shoulder-band-warmup",
@@ -430,7 +436,9 @@ export function populate() {
       type: "reps",
     },
   ]);
+}
 
+function populateProgressions() {
   db.progressions.bulkAdd([
     {
       id: "yuris-shoulder-band-warmup",
@@ -669,7 +677,9 @@ export function populate() {
       ],
     },
   ]);
+}
 
+function populateRoutines() {
   db.routines.bulkAdd([
     {
       id: "recommended-routine",
@@ -763,6 +773,153 @@ export function populate() {
             {
               progression: "extension-progression",
               exercise: "reverse-hyperextension",
+            },
+          ],
+        },
+      ],
+    },
+  ]);
+
+  db.routines.bulkAdd([
+    {
+      id: "minimalist-routine",
+      name: "Minimalist Routine",
+      workout: [
+        {
+          name: "Circuit 1",
+          sets: 1,
+          rest: 0,
+          exercises: [
+            {
+              progression: "squat-progression",
+              exercise: "assisted-squat",
+            },
+            {
+              progression: "pushup-progression",
+              exercise: "vertical-pushup",
+            },
+            {
+              progression: "row-progression",
+              exercise: "vertical-row",
+            },
+            {
+              progression: "antiextension-progression",
+              exercise: "plank",
+            },
+          ],
+        },
+        {
+          name: "Circuit 2",
+          sets: 1,
+          rest: 0,
+          exercises: [
+            {
+              progression: "squat-progression",
+              exercise: "assisted-squat",
+            },
+            {
+              progression: "pushup-progression",
+              exercise: "vertical-pushup",
+            },
+            {
+              progression: "row-progression",
+              exercise: "vertical-row",
+            },
+            {
+              progression: "antiextension-progression",
+              exercise: "plank",
+            },
+          ],
+        },
+        {
+          name: "Circuit 3",
+          sets: 1,
+          rest: 0,
+          exercises: [
+            {
+              progression: "squat-progression",
+              exercise: "assisted-squat",
+            },
+            {
+              progression: "pushup-progression",
+              exercise: "vertical-pushup",
+            },
+            {
+              progression: "row-progression",
+              exercise: "vertical-row",
+            },
+            {
+              progression: "antiextension-progression",
+              exercise: "plank",
+            },
+          ],
+        },
+        {
+          name: "Circuit 4",
+          sets: 1,
+          rest: 0,
+          exercises: [
+            {
+              progression: "squat-progression",
+              exercise: "assisted-squat",
+            },
+            {
+              progression: "pushup-progression",
+              exercise: "vertical-pushup",
+            },
+            {
+              progression: "row-progression",
+              exercise: "vertical-row",
+            },
+            {
+              progression: "antiextension-progression",
+              exercise: "plank",
+            },
+          ],
+        },
+        {
+          name: "Circuit 5",
+          sets: 1,
+          rest: 0,
+          exercises: [
+            {
+              progression: "squat-progression",
+              exercise: "assisted-squat",
+            },
+            {
+              progression: "pushup-progression",
+              exercise: "vertical-pushup",
+            },
+            {
+              progression: "row-progression",
+              exercise: "vertical-row",
+            },
+            {
+              progression: "antiextension-progression",
+              exercise: "plank",
+            },
+          ],
+        },
+        {
+          name: "Circuit 6",
+          sets: 1,
+          rest: 0,
+          exercises: [
+            {
+              progression: "squat-progression",
+              exercise: "assisted-squat",
+            },
+            {
+              progression: "pushup-progression",
+              exercise: "vertical-pushup",
+            },
+            {
+              progression: "row-progression",
+              exercise: "vertical-row",
+            },
+            {
+              progression: "antiextension-progression",
+              exercise: "plank",
             },
           ],
         },

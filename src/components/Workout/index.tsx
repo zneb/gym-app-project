@@ -8,16 +8,25 @@ import { Workout } from "../../models/types";
 import { useNavigate } from "react-router";
 import { BiExit } from "react-icons/bi";
 import { useTimer } from "./useTimer";
+import { useParams } from "react-router-dom";
 
 export function WorkoutComponent() {
+  const { name } = useParams();
+
+  if (!name) {
+    throw Error("Routine not found");
+  }
+
   const [isExiting, setIsExiting] = useState(false);
   const { Timer, showTimer, setTimer, hideTimer } = useTimer();
   const navigate = useNavigate();
-  const routine = useLiveQuery(() =>
-    db.routines.where({ id: "recommended-routine" }).first()
-  );
+  const routine = useLiveQuery(() => db.routines.where({ id: name }).first());
 
-  const currentWorkoutRef = useRef(createWorkout("recommended-routine"));
+  const currentWorkoutRef = useRef(createWorkout(name));
+
+  if (!routine) {
+    return null;
+  }
 
   const endWorkout = () => {
     if (!confirm("Are you sure you want to end this workout?")) {

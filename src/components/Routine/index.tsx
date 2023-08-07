@@ -14,7 +14,7 @@ export function Routine() {
     return null;
   }
 
-  const { name, workout } = routine;
+  const { id, name, workout } = routine;
 
   return (
     <>
@@ -36,7 +36,7 @@ export function Routine() {
         ))}
       </div>
 
-      <Link className={styles.start} to="/workout/recommended-routine">
+      <Link className={styles.start} to={`/workout/${id}`}>
         Start Workout
       </Link>
     </>
