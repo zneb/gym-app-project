@@ -49,10 +49,13 @@
 
 .weeknumber {
   border: 2px #444 solid;
-  border-radius: 20px;
-  width: 30px;
-  height: 30px;
+  border-radius: 50px;
+  width: 32px;
+  height: 32px;
   color: #b3b3b3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .today {

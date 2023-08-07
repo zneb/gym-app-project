@@ -7,29 +7,41 @@ function getLastSunday() {
   return d;
 }
 
+function addDays(date: Date, days: number) {
+  const result = new Date(date);
+  result.setDate(result.getDate() + days);
+  return result;
+}
+
 export function Week({ workouts }: { workouts: Workout[] }) {
-  const sundayDate = getLastSunday().getDate();
-  const todayDate = new Date().getDate();
+  const sundayDate = getLastSunday();
+  const todayDate = new Date();
 
   return (
     <div className={styles.week}>
       {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((day, index) => {
-        const dayHasWorkout = workouts.some(
-          (workout) => new Date(workout.date).getDate() === sundayDate + index
-        );
+        const currentDay = addDays(sundayDate, index);
 
-        const currentDay = sundayDate + index;
+        const dayHasWorkout = workouts.some((workout) => {
+          const workoutDate = new Date(workout.date);
+
+          return (
+            workoutDate.getDate() === currentDay.getDate() &&
+            workoutDate.getMonth() === currentDay.getMonth() &&
+            workoutDate.getFullYear() === currentDay.getFullYear()
+          );
+        });
 
         const activeClass = dayHasWorkout
           ? styles.hasworkout
-          : currentDay === todayDate
+          : currentDay.getDate() === todayDate.getDate()
           ? styles.today
           : "";
         return (
           <div className={styles.weekday}>
             <span className={styles.daytext}>{day}</span>
             <div className={`${styles.weeknumber} ${activeClass}`}>
-              {currentDay}
+              {currentDay.getDate()}
             </div>
           </div>
         );
