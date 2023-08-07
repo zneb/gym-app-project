@@ -55,7 +55,24 @@
   color: #b3b3b3;
 }
 
+.today {
+  border-color: #fff;
+  color: #fff;
+}
+
 .hasworkout {
   border-color: #22d793;
   color: #22d793;
+}
+
+.delete {
+  all: unset;
+  font-size: 0.8rem;
+  margin: 0 2px;
+}
+
+.top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }

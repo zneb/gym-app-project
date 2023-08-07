@@ -9,6 +9,7 @@ function getLastSunday() {
 
 export function Week({ workouts }: { workouts: Workout[] }) {
   const sundayDate = getLastSunday().getDate();
+  const todayDate = new Date().getDate();
 
   return (
     <div className={styles.week}>
@@ -17,15 +18,18 @@ export function Week({ workouts }: { workouts: Workout[] }) {
           (workout) => new Date(workout.date).getDate() === sundayDate + index
         );
 
+        const currentDay = sundayDate + index;
+
+        const activeClass = dayHasWorkout
+          ? styles.hasworkout
+          : currentDay === todayDate
+          ? styles.today
+          : "";
         return (
           <div className={styles.weekday}>
             <span className={styles.daytext}>{day}</span>
-            <div
-              className={`${styles.weeknumber} ${
-                dayHasWorkout ? styles.hasworkout : ""
-              }`}
-            >
-              {sundayDate + index}
+            <div className={`${styles.weeknumber} ${activeClass}`}>
+              {currentDay}
             </div>
           </div>
         );

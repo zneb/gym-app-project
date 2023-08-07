@@ -3,7 +3,7 @@ import { Title } from "../Title";
 import { db } from "../../models/db";
 import styles from "./History.module.css";
 import { ExerciseLog } from "./ExerciseLog";
-import { FaCaretLeft, FaCaretRight } from "react-icons/fa";
+import { FaCaretLeft, FaCaretRight, FaTrash } from "react-icons/fa";
 import { useState } from "react";
 import { Week } from "./Week";
 
@@ -49,14 +49,29 @@ export function History() {
         </div>
         <div className={styles.container}>
           <div className={styles.workout} key={workoutData.date}>
-            <span className={styles.date}>
-              {new Date(workoutData.date).toLocaleString("en-CA", {
-                weekday: "long",
-                month: "long",
-                day: "numeric",
-              })}{" "}
-              Workout
-            </span>
+            <div className={styles.top}>
+              <span className={styles.date}>
+                {new Date(workoutData.date).toLocaleString("en-CA", {
+                  weekday: "long",
+                  month: "long",
+                  day: "numeric",
+                })}{" "}
+                Workout
+              </span>
+              <button
+                className={styles.delete}
+                onClick={() => {
+                  if (confirm("Delete this workout?")) {
+                    if (currentWorkout != 0) {
+                      setCurrentWorkout(currentWorkout - 1);
+                    }
+                    db.workouts.where({ date: workoutData.date }).delete();
+                  }
+                }}
+              >
+                <FaTrash />
+              </button>
+            </div>
             <div className={styles.exercises}>
               {workoutData.exercises.map(({ exercise, count }, index) => (
                 <ExerciseLog exercise={exercise} count={count} key={index} />
