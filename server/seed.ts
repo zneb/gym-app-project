@@ -122,6 +122,162 @@ async function seed() {
   await db.query(`
     insert into progressions (id, name, exercises, progressions)
     values
+    ('yuris-shoulder-band-warmup', 'Yuri''s Shoulder Band Warmup', ARRAY ['yuris-shoulder-band-warmup'], '[]'),
+    ('squat-sky-reaches', 'Squat Sky Reaches', ARRAY ['squat-sky-reaches'], '[]'),
+    ('gmb-wrist-prep', 'GMB Wrist Prep', ARRAY ['gmb-wrist-prep'], '[]'),
+    ('deadbugs', 'Deadbugs', ARRAY ['deadbugs'], '[]'),
+    ('arch-hang', 'Arch Hang', ARRAY ['arch-hang'], '[]'),
+    ('parallel-bar-support-hold', 'Parallel Bar Support Hold', ARRAY ['parallel-bar-support-hold'], '[]'),
+    ('bulgarian-split-squat', 'Bulgarian Split Squat', ARRAY ['bulgarian-split-squat'], '[]'),
+    ('pullup-progression', 'Pull-up Progression', ARRAY [
+        'scapular-pull',
+        'arch-hang',
+        'pullup-negative',
+        'pullup',
+        'weighted-pullup',
+        'lsit-pullup',
+        'arch-body-pullup',
+        'typewriter-pullup',
+        'archer-pullup'
+      ], '[[0, 1, 2, 3, [4, 5, 6, 7], [null, null, null, 8]]]'),
+    ('squat-progression', 'Squat Progression', ARRAY [
+        'assisted-squat',
+        'squat',
+        'split-squat',
+        'bulgarian-split-squat',
+        'beginner-shrimp-squat',
+        'stepup',
+        'partial-rom-pistol-squat',
+        'intermediate-shrimp-squat',
+        'advanced-shrimp-squat',
+        'advanced-shrimp-squat',
+        'typewriter-pullup',
+        'weighted-shrimp-squat'
+      ], '[
+        [0, 1, 2, 3, [4, 5, 6], [7, 8, 9], [10, null, null], [11, null, null]]
+      ]'),
+    ('dip-progression', 'Dip Progression', ARRAY [
+        'parallel-bar-support-hold',
+        'negative-dip',
+        'parallel-bar-dip',
+        'weighted-dip',
+        'ring-dip',
+        'ring-rto-dip'
+      ], '[[0, 1, 2, [3, 4], [null, 5]]]'),
+    ('hinge-progression', 'Hinge Progression', ARRAY [
+        'romanian-deadlift',
+        'single-legged-deadlift',
+        'banded-nordic-curl-negatives',
+        'beginner-harop-curl',
+        'glute-ham-raise',
+        'negative-hamstring-slide',
+        'banded-nordic-curl',
+        'advanced-harop-curl',
+        'hamstring-slide',
+        'nordic-curl',
+        'eccentric-single-leg-hamstring-slide',
+        'single-leg-hamstring-slide'
+      ], '[
+        [
+          0,
+          1,
+          [2, 3, 4, 5],
+          [6, 7, null, 8],
+          [9, null, null, 10],
+          [null, null, null, 11]
+        ]
+      ]'),
+    ('row-progression', 'Row Progression', ARRAY [
+        'vertical-row',
+        'incline-row',
+        'horizontal-row',
+        'wide-row',
+        'weighted-inverted-row',
+        'tuck-front-lever',
+        'archer-row',
+        'tuck-front-lever-pull',
+        'one-arm-row',
+        'advanced-tuck-front-lever',
+        'advanced-tuck-front-lever-pull',
+        'half-straddle-front-lever',
+        'half-straddle-front-lever-pull',
+        'straddle-front-lever',
+        'straddle-front-lever-pull',
+        'half-lay-front-lever',
+        'half-lay-front-lever-pull',
+        'full-lay-front-lever',
+        'full-lay-front-lever-pull'
+      ], '[
+        [
+          0,
+          1,
+          2,
+          3,
+          [4, 5, 6],
+          [null, 7, 8],
+          [null, 9, null],
+          [null, 10, null],
+          [null, 11, null],
+          [null, 12, null],
+          [null, 13, null],
+          [null, 14, null],
+          [null, 15, null],
+          [null, 16, null],
+          [null, 17, null],
+          [null, 18, null]
+        ]
+      ]'),
+    ('pushup-progression', 'Push-Up Progression', ARRAY [
+        'vertical-pushup',
+        'incline-pushup',
+        'pushup',
+        'diamond-pushup',
+        'pseudo-planche-pushup',
+        'rings-pushup',
+        'rto-pushup'
+      ], '[[0, 1, 2, 3, [4, 5], [null, 6]]]'),
+    ('antiextension-progression', 'Anti-extension Progression', ARRAY [
+        'plank',
+        'ring-ab-rollout',
+        'kneeling-ab-wheel-rollout',
+        'tucked-hanging-leg-raise',
+        'pike-compression',
+        'standing-ab-wheel-rollout',
+        'pike-hanging-leg-raise',
+        'straight-hanging-leg-raise'
+      ], '[
+        [0, [1, 2, 3, 4], [null, 5, 6, null], [null, null, 7, null]]
+      ]'),
+    ('antirotation-progression', 'Anti-rotation Progression', ARRAY [
+        'banded-pallof-press',
+        'assisted-knee-copenhagen-plank',
+        'ring-pallof-press',
+        'knee-copenhagen-plank',
+        'assisted-copenhagen-plank',
+        'copenhagen-plank',
+        'copenhagen-plank-with-movement'
+      ], '[
+        [
+          [0, 1, 2],
+          [null, 3, null],
+          [null, 4, null],
+          [null, 5, null],
+          [null, 6, null]
+        ]
+      ]'),
+    ('extension-progression', 'Extension Progression', ARRAY [
+        'reverse-hyperextension',
+        'arch-raise',
+        'hyper-extension',
+        'arch-body-hold',
+        'arch-body-rocks'
+      ], '[
+        [
+          [0, 1, 2],
+          [null, 3, null],
+          [null, 4, null]
+        ]
+      ]');
     `);
   await db.end();
 }
