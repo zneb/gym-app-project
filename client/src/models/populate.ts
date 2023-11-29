@@ -22,19 +22,6 @@ function populateExercises() {
     },
     { id: "gmb-wrist-prep", name: "GMB Wrist Prep", reps: [10], type: "reps" },
     { id: "deadbugs", name: "Deadbugs", reps: [10], type: "reps" },
-    // { id: "arch-hang", name: "Arch Hang", reps: [30], type: "time" },
-    // {
-    //   id: "parallel-bar-support-hold",
-    //   name: "Parallel Bar Support Hold",
-    //   reps: [30],
-    //   type: "time",
-    // },
-    // {
-    //   id: "bulgarian-split-squat",
-    //   name: "Bulgarian Split Squat",
-    //   reps: [10],
-    //   type: "reps",
-    // },
     { id: "scapular-pull", name: "Scapular Pull", reps: [5, 8], type: "reps" },
     { id: "arch-hang", name: "Arch Hang", reps: [15, 30], type: "time" },
     {
