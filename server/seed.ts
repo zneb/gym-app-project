@@ -107,6 +107,22 @@ async function seed() {
       ('arch-body-rocks', 'Arch Body Rocks', ARRAY [8, 12], 'reps');
     `);
 
+  await db.query(`drop table if exists progressions`);
+
+  await db.query(`
+    create table progressions
+        (id text, 
+        name text NOT NULL, 
+        exercises text[] NOT NULL,
+        progressions json NOT NULL,
+        primary key (id)
+        );
+    `);
+
+  await db.query(`
+    insert into progressions (id, name, exercises, progressions)
+    values
+    `);
   await db.end();
 }
 
