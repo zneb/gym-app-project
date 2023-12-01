@@ -11,6 +11,16 @@ app.get("/exercises", async (req, res) => {
   res.json(exercisesRes.rows);
 });
 
+app.get("/progressions", async (req, res) => {
+  const progressionsRes = await db.query("select * from progressions");
+  res.json(progressionsRes.rows);
+});
+
+app.get("/routines", async (req, res) => {
+  const routinesRes = await db.query("select * from routines");
+  res.json(routinesRes.rows);
+});
+
 app.use((req, res) => {
   res.status(404).send("404");
 });

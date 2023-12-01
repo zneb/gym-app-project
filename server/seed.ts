@@ -279,6 +279,220 @@ async function seed() {
         ]
       ]');
     `);
+
+  await db.query(`drop table if exists routines`);
+
+  await db.query(`
+      create table routines
+          (id text,
+          name text NOT NULL,
+          workout json NOT NULL
+          );
+      `);
+
+  await db.query(
+    `
+  insert into routines (id, name, workout)
+    values
+    ('recommended-routine', 'Recommended Routine', '[
+      {
+        "name": "Warm-Up",
+        "sets": 1,
+        "rest": 0,
+        "exercises": [
+          {
+            "progression": "yuris-shoulder-band-warmup",
+            "exercise": "yuris-shoulder-band-warmup"
+          },
+          {
+            "progression": "squat-sky-reaches",
+            "exercise": "squat-sky-reaches"
+          },
+          {
+            "progression": "gmb-wrist-prep",
+            "exercise": "gmb-wrist-prep"
+          },
+          {
+            "progression": "deadbugs",
+            "exercise": "deadbugs"
+          },
+          {
+            "progression": "arch-hang",
+            "exercise": "arch-hang"
+          },
+          {
+            "progression": "parallel-bar-support-hold",
+            "exercise": "parallel-bar-support-hold"
+          },
+          {
+            "progression": "bulgarian-split-squat",
+            "exercise": "bulgarian-split-squat"
+          }
+        ]
+      },
+      {
+        "name": "Pair 1",
+        "sets": 3,
+        "rest": 90,
+        "exercises": [
+          {
+            "progression": "pullup-progression",
+            "exercise": "scapular-pull"
+          },
+          {
+            "progression": "squat-progression",
+            "exercise": "assisted-squat"
+          }
+        ]
+      },
+      {
+        "name": "Pair 2",
+        "sets": 3,
+        "rest": 90,
+        "exercises": [
+          {
+            "progression": "dip-progression",
+            "exercise": "parallel-bar-support-hold"
+          },
+          {
+            "progression": "hinge-progression",
+            "exercise": "romanian-deadlift"
+          }
+        ]
+      },
+      {
+        "name": "Pair 3",
+        "sets": 3,
+        "rest": 90,
+        "exercises": [
+          {
+            "progression": "row-progression",
+            "exercise": "vertical-row"
+          },
+          {
+            "progression": "pushup-progression",
+            "exercise": "vertical-pushup"
+          }
+        ]
+      },
+      {
+        "name": "Core triplet",
+        "sets": 3,
+        "rest": 60,
+        "exercises": [
+          {
+            "progression": "antiextension-progression",
+            "exercise": "plank"
+          },
+          {
+            "progression": "antirotation-progression",
+            "exercise": "banded-pallof-press"
+          },
+          {
+            "progression": "extension-progression",
+            "exercise": "reverse-hyperextension"
+          }
+        ]
+      }
+    ]'),
+
+    ('minimalist-routine', 'Minimalist Routine', '[
+      {
+        "name": "Circuit 1",
+        "sets": 1,
+        "rest": 0,
+        "exercises": [
+          {
+            "progression": "squat-progression",
+            "exercise": "assisted-squat"
+          },
+          {
+            "progression": "pushup-progression",
+            "exercise": "vertical-pushup"
+          },
+          {
+            "progression": "row-progression",
+            "exercise": "vertical-row"
+          },
+          {
+            "progression": "antiextension-progression",
+            "exercise": "plank"
+          }
+        ]
+      },
+      {
+        "name": "Circuit 2",
+        "sets": 1,
+        "rest": 0,
+        "exercises": [
+          {
+            "progression": "squat-progression",
+            "exercise": "assisted-squat"
+          },
+          {
+            "progression": "pushup-progression",
+            "exercise": "vertical-pushup"
+          },
+          {
+            "progression": "row-progression",
+            "exercise": "vertical-row"
+          },
+          {
+            "progression": "antiextension-progression",
+            "exercise": "plank"
+          }
+        ]
+      },
+      {
+        "name": "Circuit 3",
+        "sets": 1,
+        "rest": 0,
+        "exercises": [
+          {
+            "progression": "squat-progression",
+            "exercise": "assisted-squat"
+          },
+          {
+            "progression": "pushup-progression",
+            "exercise": "vertical-pushup"
+          },
+          {
+            "progression": "row-progression",
+            "exercise": "vertical-row"
+          },
+          {
+            "progression": "antiextension-progression",
+            "exercise": "plank"
+          }
+        ]
+      },
+      {
+        "name": "Circuit 4",
+        "sets": 1,
+        "rest": 0,
+        "exercises": [
+          {
+            "progression": "squat-progression",
+            "exercise": "assisted-squat"
+          },
+          {
+            "progression": "pushup-progression",
+            "exercise": "vertical-pushup"
+          },
+          {
+            "progression": "row-progression",
+            "exercise": "vertical-row"
+          },
+          {
+            "progression": "antiextension-progression",
+            "exercise": "plank"
+          }
+        ]
+      }
+    ]');
+  `
+  );
+
   await db.end();
 }
 
