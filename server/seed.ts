@@ -5,14 +5,13 @@ async function seed() {
 
   await db.query(`
     create table users
-        (id serial, 
-        username text UNIQUE NOT NULL, 
+        (username text, 
         password text NOT NULL,
         weight decimal,
         height decimal,
         history json,
         sessionid uuid,
-        primary key (id)
+        primary key (username)
         );
     `);
 
