@@ -1,6 +1,19 @@
 import { db } from "./lib/db";
 
 async function seed() {
+  await db.query(`drop table if exists users`);
+
+  await db.query(`
+    create table users
+        (id serial, 
+        username text UNIQUE NOT NULL, 
+        password text NOT NULL,
+        history json,
+        sessionid uuid,
+        primary key (id)
+        );
+    `);
+
   await db.query(`drop table if exists exercises`);
 
   await db.query(`
