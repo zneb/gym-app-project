@@ -1,8 +1,9 @@
 import Dexie, { Table } from "dexie";
-import { Exercise, Progression, Routine, Workout } from "./types";
+import { Exercise, Progression, Routine, User, Workout } from "./types";
 import { populate } from "./populate";
 
 export class AppDB extends Dexie {
+  userData!: Table<User, string>;
   exercises!: Table<Exercise, string>;
   progressions!: Table<Progression, string>;
   routines!: Table<Routine, string>;

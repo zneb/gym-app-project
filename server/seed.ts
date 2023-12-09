@@ -8,6 +8,8 @@ async function seed() {
         (id serial, 
         username text UNIQUE NOT NULL, 
         password text NOT NULL,
+        weight decimal,
+        height decimal,
         history json,
         sessionid uuid,
         primary key (id)

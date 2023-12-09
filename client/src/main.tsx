@@ -9,6 +9,7 @@ import { Home } from "./routes/home.tsx";
 import { Settings } from "./routes/settings.tsx";
 import { ProgressionPage } from "./routes/progression.tsx";
 import { WorkoutPage } from "./routes/workout.tsx";
+import { AuthPage } from "./routes/auth.tsx";
 
 const router = createBrowserRouter([
   {
@@ -25,6 +26,7 @@ const router = createBrowserRouter([
             element: <ProgressionPage />,
           },
           { path: "/workout/:name", element: <WorkoutPage /> },
+          { path: "/auth", element: <AuthPage /> },
         ],
       },
       {
