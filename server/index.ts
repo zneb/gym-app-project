@@ -48,7 +48,7 @@ app.post("/auth", async (req, res) => {
     `);
 
     const userSessionRes = await db.query(`
-      select username, weight, height, history, sessionid from users
+      select username, weight, height, sessionid from users
       where username = '${username}' and password = '${password}'
     `);
 
@@ -76,10 +76,10 @@ app.post("/auth", async (req, res) => {
     const newUserRes = await db
       .query(
         `
-    insert into users (username, password, sessionid)
-    values
-    ('${username}', '${password}', gen_random_uuid());
-    `
+        insert into users (username, password, sessionid)
+        values
+        ('${username}', '${password}', gen_random_uuid());
+        `
       )
       .catch(() => null);
 
@@ -92,7 +92,7 @@ app.post("/auth", async (req, res) => {
     }
 
     const userSessionRes = await db.query(`
-      select username, weight, height, history, sessionid from users
+      select username, weight, height, sessionid from users
       where username = '${username}'
     `);
 
