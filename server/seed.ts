@@ -9,7 +9,6 @@ async function seed() {
         password text NOT NULL,
         weight numeric(4, 1),
         height numeric(4, 1),
-        history json,
         sessionid uuid,
         primary key (username)
         );

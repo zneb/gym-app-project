@@ -6,7 +6,6 @@ export interface User {
   username: string;
   weight: string | null;
   height: string | null;
-  history: Workout[] | null;
   sessionid: string;
 }
 
