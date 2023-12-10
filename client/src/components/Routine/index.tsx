@@ -4,10 +4,23 @@ import { Title } from "../Title";
 import { useLiveQuery } from "dexie-react-hooks";
 import { db } from "../../lib/db";
 import { ExerciseInfo } from "./ExerciseInfo";
+import { FaExchangeAlt } from "react-icons/fa";
+import { useState } from "react";
 
 export function Routine() {
-  const routine = useLiveQuery(() =>
-    db.routines.where({ id: "recommended-routine" }).first()
+  const [routineId, setRoutineId] = useState("recommended-routine");
+
+  const toggleRoutine = () => {
+    setRoutineId(
+      routineId === "recommended-routine"
+        ? "minimalist-routine"
+        : "recommended-routine"
+    );
+  };
+
+  const routine = useLiveQuery(
+    () => db.routines.where({ id: routineId }).first(),
+    [routineId]
   );
 
   if (!routine) {
@@ -18,7 +31,14 @@ export function Routine() {
 
   return (
     <>
-      <Title>{name}</Title>
+      <Title
+        button={{
+          icon: FaExchangeAlt,
+          action: toggleRoutine,
+        }}
+      >
+        {name}
+      </Title>
       <div className={styles.routine}>
         {workout.map(({ name: pair, exercises }) => (
           <div className={styles.group} key={pair}>

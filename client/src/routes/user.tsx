@@ -1,6 +1,4 @@
-import { useLiveQuery } from "dexie-react-hooks";
 import { Title } from "../components/Title";
-import { db } from "../lib/db";
 import { useNavigate } from "react-router-dom";
 import { User } from "../components/User";
 import { useSession } from "../lib/session";

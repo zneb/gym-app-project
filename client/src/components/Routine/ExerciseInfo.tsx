@@ -23,7 +23,7 @@ export function ExerciseInfo({
   );
 
   if (!progressionData || !exerciseData) {
-    return "failed";
+    return null;
   }
 
   const { name, reps, type } = exerciseData;
