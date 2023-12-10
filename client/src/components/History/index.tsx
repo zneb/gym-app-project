@@ -1,6 +1,6 @@
 import { useLiveQuery } from "dexie-react-hooks";
 import { Title } from "../Title";
-import { db } from "../../models/db";
+import { db } from "../../lib/db";
 import styles from "./History.module.css";
 import { ExerciseLog } from "./ExerciseLog";
 import { FaCaretLeft, FaCaretRight, FaTrash } from "react-icons/fa";

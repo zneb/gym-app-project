@@ -43,10 +43,16 @@ app.post("/auth", async (req, res) => {
 
     await db.query(`
       update users
-      set sessionid = 
+      set sessionid = gen_random_uuid()
+      where username = '${username}'
     `);
 
-    res.json({ success: true, user: userRes.rows[0] });
+    const userSessionRes = await db.query(`
+      select username, weight, height, history, sessionid from users
+      where username = '${username}' and password = '${password}'
+    `);
+
+    res.json({ success: true, user: userSessionRes.rows[0] });
     return;
   }
 
@@ -70,9 +76,9 @@ app.post("/auth", async (req, res) => {
     const newUserRes = await db
       .query(
         `
-    insert into users (username, password)
+    insert into users (username, password, sessionid)
     values
-    ('${username}', '${password}');
+    ('${username}', '${password}', gen_random_uuid());
     `
       )
       .catch(() => null);
@@ -85,8 +91,54 @@ app.post("/auth", async (req, res) => {
       return;
     }
 
-    res.json({ success: true, user: newUserRes.rows[0] });
+    const userSessionRes = await db.query(`
+      select username, weight, height, history, sessionid from users
+      where username = '${username}'
+    `);
+
+    res.json({ success: true, user: userSessionRes.rows[0] });
   }
+});
+
+app.post("/update", async (req, res) => {
+  const { sessionid, weight, height } = req.body;
+
+  if (
+    (weight !== null && typeof weight !== "number") ||
+    weight >= 999 ||
+    weight < 0
+  ) {
+    res.json({ success: false, message: "Weight is invalid" });
+    return;
+  }
+
+  if (
+    (height !== null && typeof height !== "number") ||
+    height >= 999 ||
+    height < 0
+  ) {
+    res.json({ success: false, message: "Height is invalid" });
+    return;
+  }
+
+  await db.query(`
+    update users
+    set weight = ${weight.toFixed(1) || "NULL"}, height = ${
+    height.toFixed(1) || "NULL"
+  }
+    where sessionid = '${sessionid}';
+  `);
+
+  const measuresRes = await db.query(`
+    select weight, height from users
+    where sessionid = '${sessionid}'
+  `);
+
+  res.json({
+    success: true,
+    message: "Updated successfully",
+    ...measuresRes.rows[0],
+  });
 });
 
 app.use((_, res) => {

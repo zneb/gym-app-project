@@ -1,4 +1,4 @@
-import { Workout } from "../../models/types";
+import { Workout } from "../../lib/types";
 import styles from "./History.module.css";
 
 function getLastSunday() {

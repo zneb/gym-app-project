@@ -50,7 +50,7 @@
   bottom: 10px;
   left: 10px;
   right: 10px;
-  width: calc(100vw - 20px);
+  width: calc(100% - 20px);
   background: var(--accent-color);
   padding: 0.85em 0;
   border-radius: 50px;

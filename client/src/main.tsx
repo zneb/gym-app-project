@@ -6,7 +6,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { ErrorPage } from "./routes/error-page.tsx";
 import { HistoryPage } from "./routes/history.tsx";
 import { Home } from "./routes/home.tsx";
-import { Settings } from "./routes/settings.tsx";
+import { UserPage } from "./routes/user.tsx";
 import { ProgressionPage } from "./routes/progression.tsx";
 import { WorkoutPage } from "./routes/workout.tsx";
 import { AuthPage } from "./routes/auth.tsx";
@@ -33,7 +33,7 @@ const router = createBrowserRouter([
         path: "history",
         element: <HistoryPage />,
       },
-      { path: "settings", element: <Settings /> },
+      { path: "user", element: <UserPage /> },
     ],
   },
 ]);

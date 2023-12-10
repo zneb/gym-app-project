@@ -2,7 +2,7 @@ import { FaTimes } from "react-icons/fa";
 import { Title } from "../Title";
 import styles from "./Progression.module.css";
 import { useNavigate, useParams } from "react-router-dom";
-import { db } from "../../models/db";
+import { db } from "../../lib/db";
 import { useLiveQuery } from "dexie-react-hooks";
 
 export function Progression() {

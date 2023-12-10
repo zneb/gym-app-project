@@ -1,6 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
 import styles from "./Navbar.module.css";
-import { FaHome, FaCalendar, FaCog } from "react-icons/fa";
+import { FaHome, FaCalendar, FaUser } from "react-icons/fa";
 
 export function Navbar() {
   const location = useLocation();
@@ -26,13 +26,13 @@ export function Navbar() {
         <span className={styles.text}>History</span>
       </Link>
       <Link
-        to="/settings"
+        to="/user"
         className={`${styles.link} ${
-          location.pathname === "/settings" ? styles.active : null
+          location.pathname === "/user" ? styles.active : null
         }`}
       >
-        <FaCog />
-        <span className={styles.text}>Settings</span>
+        <FaUser />
+        <span className={styles.text}>User</span>
       </Link>
     </div>
   );

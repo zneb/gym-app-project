@@ -7,8 +7,8 @@ async function seed() {
     create table users
         (username text, 
         password text NOT NULL,
-        weight decimal,
-        height decimal,
+        weight numeric(4, 1),
+        height numeric(4, 1),
         history json,
         sessionid uuid,
         primary key (username)

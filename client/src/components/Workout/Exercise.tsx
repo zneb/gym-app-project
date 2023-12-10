@@ -2,8 +2,8 @@ import { FaCheck } from "react-icons/fa";
 import styles from "./Workout.module.css";
 import { useRef, useState } from "react";
 import { useLiveQuery } from "dexie-react-hooks";
-import { db } from "../../models/db";
-import { Workout } from "../../models/types";
+import { db } from "../../lib/db";
+import { Workout } from "../../lib/types";
 
 export function Exercise({
   progression,

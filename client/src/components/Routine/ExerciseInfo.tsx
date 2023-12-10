@@ -1,7 +1,7 @@
 import styles from "./Routine.module.css";
 import { Link } from "react-router-dom";
 import { useLiveQuery } from "dexie-react-hooks";
-import { db } from "../../models/db";
+import { db } from "../../lib/db";
 
 export function ExerciseInfo({
   progression,

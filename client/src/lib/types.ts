@@ -3,10 +3,10 @@ type ProgressionId = string;
 type RoutineId = string;
 
 export interface User {
-  id: number;
   username: string;
-  weight: number | null;
-  height: number | null;
+  weight: string | null;
+  height: string | null;
+  history: Workout[] | null;
   sessionid: string;
 }
 

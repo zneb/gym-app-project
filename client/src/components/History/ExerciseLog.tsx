@@ -1,5 +1,5 @@
 import { useLiveQuery } from "dexie-react-hooks";
-import { db } from "../../models/db";
+import { db } from "../../lib/db";
 import styles from "./History.module.css";
 
 export function ExerciseLog({

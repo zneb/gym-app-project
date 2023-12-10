@@ -2,7 +2,7 @@ import styles from "./Routine.module.css";
 import { Link } from "react-router-dom";
 import { Title } from "../Title";
 import { useLiveQuery } from "dexie-react-hooks";
-import { db } from "../../models/db";
+import { db } from "../../lib/db";
 import { ExerciseInfo } from "./ExerciseInfo";
 
 export function Routine() {

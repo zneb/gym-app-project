@@ -1,7 +1,11 @@
 import { useState } from "react";
 import styles from "./Auth.module.css";
+import { db } from "../../lib/db";
+import { useNavigate } from "react-router-dom";
 
 export function Auth() {
+  const navigate = useNavigate();
+
   const [error, setError] = useState<string | null>(null);
 
   const [isSignup, setIsSignup] = useState(false);
@@ -9,7 +13,7 @@ export function Auth() {
   const [password, setPassword] = useState("");
 
   const submit = async () => {
-    const res = await fetch("http://localhost:3000/auth", {
+    const authRes = await fetch("http://localhost:3000/auth", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -21,13 +25,14 @@ export function Auth() {
       }),
     }).then((res) => res.json());
 
-    if (res.success === false) {
-      setError(res.message);
+    if (authRes.success === false) {
+      setError(authRes.message);
     }
 
-    if (res.success === true) {
-      setError(null);
-      console.log(res);
+    if (authRes.success === true) {
+      db.userData.add(authRes.user).then(() => {
+        navigate("/");
+      });
     }
   };
 
