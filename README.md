@@ -31,3 +31,5 @@ npm run dev
 9. Open the url shown by the previous command
 
 ## 2
+
+[Project Report](./project-report.md)
