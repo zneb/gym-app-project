@@ -18,7 +18,7 @@ async function seed() {
 
   await db.query(`
     create table exercises
-        (id text, 
+        (id text,
         name text NOT NULL, 
         reps Integer[] NOT NULL,
         type text NOT NULL,

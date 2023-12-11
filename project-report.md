@@ -39,10 +39,12 @@ The server provides an api accessed by the client.
 The client has an embedded database that caches the data retrieved from the server.
 This is done as the application is supposed to represent a mobile application.
 The user can update values stored on the server such as weight and height.
+The main feature I decided to implement was exercise routines.
 
 ## Bonus features
 
 - Timer system (for rest and time based exercies)
 - Local workout history
-- Interchangable exercices
 - Local database
+- Web UI
+- Interchangable exercices and exercise routines

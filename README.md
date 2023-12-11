@@ -15,7 +15,6 @@ npm run seed
 5. Start the api server with
 
 ```
-npm install
 npm start
 ```
 
@@ -30,6 +29,12 @@ npm run dev
 
 9. Open the url shown by the previous command
 
-## 2
+## Links
+
+[Video demo](https://youtu.be/ZijiIoEnfjs)
 
 [Project Report](./project-report.md)
+
+## Team
+
+Me
